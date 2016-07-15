@@ -4,6 +4,7 @@ using System.Collections;
 public class ScareTrigger : MonoBehaviour {
 
     public AudioSource scareAudioSource;
+    public Light scareLight;
     bool hasPlayedAudio;
 
     void OnTriggerEnter(Collider other)
@@ -12,6 +13,7 @@ public class ScareTrigger : MonoBehaviour {
         {
             scareAudioSource.Play();
             hasPlayedAudio = true;
+            scareLight.enabled = true;
         }
     }
 }
