@@ -36,7 +36,13 @@ public class Interact : MonoBehaviour
                 {
                     if(hit.collider.CompareTag("Door"))
                     {
+                        Debug.Log("Interact with Door");
                         hit.collider.GetComponent<Door>().ChangeDoorState();
+                    }
+                    else if(hit.collider.CompareTag("Key"))
+                    {
+                        Debug.Log("Interact with Key");
+                        hit.collider.GetComponent<Key>().UnlockDoor();
                     }
                 }
             }

@@ -9,6 +9,10 @@ public class Door : MonoBehaviour {
 
     public float smooth = 2f; //this is the speed of the rotation
     public AudioSource audioSource;
+
+    public bool isLocked = false;
+    public AudioClip isLockedAudioClip;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -16,11 +20,20 @@ public class Door : MonoBehaviour {
 
     public void ChangeDoorState()
     {
-        open = !open;
-
-        if(audioSource != null)
+        if (isLocked != true)
         {
-            audioSource.Play();
+            open = !open;
+
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            if(isLockedAudioClip != null)
+                audioSource.PlayOneShot(isLockedAudioClip);
         }
 
     }
