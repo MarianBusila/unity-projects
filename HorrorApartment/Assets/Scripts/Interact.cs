@@ -51,6 +51,10 @@ public class Interact : MonoBehaviour
                         hit.collider.GetComponent<Note>().ShowNoteImage();
 
                     }
+                    else if (hit.collider.CompareTag("Pistol"))
+                    {
+                        hit.collider.GetComponent<PistolPickup>().PickupPistol();
+                    }
                 }
             }
         }
