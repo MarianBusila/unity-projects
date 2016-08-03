@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class Player_Health : MonoBehaviour {
 
     public int maxHealth = 100;
@@ -23,7 +23,6 @@ public class Player_Health : MonoBehaviour {
 
     void Die()
     {
-        //We are going to load a game over scene
-        Debug.Log("GameOver");
+        SceneManager.LoadScene("menu");
     }
 }

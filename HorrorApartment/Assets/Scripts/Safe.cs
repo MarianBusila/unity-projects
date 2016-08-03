@@ -53,8 +53,7 @@ public class Safe : MonoBehaviour {
 
         //checks that 1112 code was inserted
         if(number01 == 1 && number02 == 1 && number03 == 1 && number04 == 2)
-        {
-            Debug.Log("Open safe");
+        {            
             opened = true;
         }
 
