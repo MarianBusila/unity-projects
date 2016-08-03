@@ -34,7 +34,7 @@ public class Pistol : MonoBehaviour {
             if (hit.collider.CompareTag("Enemy"))
             {
                 //Damage the enemy
-                Debug.Log("We hit an enemy!");
+                hit.collider.GetComponent<Enemy_Health>().TakeDamage(damage);
             }
         }
         myAudioSource.PlayOneShot(shootSound);

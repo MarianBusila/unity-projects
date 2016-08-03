@@ -14,6 +14,8 @@ public class Enemy_Chase : MonoBehaviour {
 
     private float distanceFromTarget;
 
+    public int damage = 50;
+
 	// Use this for initialization
 	void Start () {
         myAgent = GetComponent<NavMeshAgent>();
@@ -57,8 +59,9 @@ public class Enemy_Chase : MonoBehaviour {
         if(Time.time > attackCooldown)
         {
             Debug.Log("Attack");
-            myAnimator.SetTrigger("Attack");
+            myAnimator.SetTrigger("Attack");            
             attackCooldown = Time.time + delayBetweenAttacks;
+            transformTarget.GetComponent<Player_Health>().TakeDamage(damage);
         }
     }
 }
