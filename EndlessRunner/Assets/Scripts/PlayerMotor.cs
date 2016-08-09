@@ -44,6 +44,14 @@ public class PlayerMotor : MonoBehaviour {
 
         //X - Left and Right
         moveVector.x = Input.GetAxisRaw("Horizontal") * speed;
+        if(Input.GetMouseButton(0))
+        {
+            //click / touch on the right side
+            if (Input.mousePosition.x > Screen.width / 2)
+                moveVector.x = 1 * speed;
+            else
+                moveVector.x = -1 * speed;
+        }
         //Y - Up and Down
         moveVector.y = verticalVelocity;
         //Z - Forward and Backward
