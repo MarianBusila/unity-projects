@@ -1,10 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class Block
+{
+    public int type;
+    public bool vis;
+
+    public Block(int t, bool v)
+    {
+        type = t;
+        vis  = v;
+    }
+}
 public class GenerateLandscape : MonoBehaviour {
 
     public int width = 128;
     public int depth = 128;
+    public int height = 128;
+
     public int heightScale = 20;
     public float detailScale = 25.0f;
 
@@ -12,26 +25,102 @@ public class GenerateLandscape : MonoBehaviour {
     public GameObject sandBlock;
     public GameObject snowBlock;
 
+    Block[,,] worldBlocks;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
+        worldBlocks = new Block[width, height, depth];
         int seed = (int)Network.time * 10;
-	    for(int z = 0 ; z < depth; z++)
-            for (int x = 0 ; x < width; x++)
+        for (int z = 0; z < depth; z++)
+            for (int x = 0; x < width; x++)
             {
                 int y = (int)(Mathf.PerlinNoise((x + seed) / detailScale, (z + seed) / detailScale) * heightScale);
                 Vector3 blockPos = new Vector3(x, y, z);
-                if(y > heightScale / 4 * 3)
-                    Instantiate(snowBlock, blockPos, Quaternion.identity);
-                else if (y < heightScale / 4)
-                    Instantiate(sandBlock, blockPos, Quaternion.identity);
-                else
-                    Instantiate(grassBlock, blockPos, Quaternion.identity);
+
+                CreateBlock(y, blockPos, true);
+                while (y > 0)
+                {
+                    y--;
+                    blockPos = new Vector3(x, y, z);
+                    CreateBlock(y, blockPos, false);
+                }
             }
+    }
+
+    void CreateBlock(int y, Vector3 blockPos, bool create)
+    {
+        if (y > heightScale / 4 * 3)
+        {
+            if (create)
+                Instantiate(snowBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(1, create);
+        }
+        else if (y < heightScale / 4)
+        {
+            if (create)
+                Instantiate(sandBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(3, create);
+        }
+        else
+        {
+            if (create)
+                Instantiate(grassBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(2, create);
+        }
+    }
+
+    void DrawBlock(Vector3 blockPos)
+    {
+        //do not draw block outside of the world
+        if (blockPos.x < 0 || blockPos.x >= width || blockPos.y < 0 || blockPos.y >= height || blockPos.z < 0 || blockPos.z >= depth)
+            return;
+
+        if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] == null)
+            return;
+
+        if (!worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis)
+        {
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis = true;
+            if(worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 1)
+                Instantiate(snowBlock, blockPos, Quaternion.identity);
+            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 2)
+                Instantiate(grassBlock, blockPos, Quaternion.identity);
+            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 3)
+                Instantiate(sandBlock, blockPos, Quaternion.identity);
+            else
+                worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis = false;
+        }
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if(Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0));
+            if(Physics.Raycast(ray, out hit, 1000.0f))
+            {
+                Vector3 blockPos = hit.transform.position;
+                //this is the bottom block. don't delete it
+                if ((int)blockPos.y == 0)
+                    return;
+
+                worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = null;
+
+                Destroy(hit.transform.gameObject);
+
+                for(int x = -1; x <= 1; x++)
+                    for (int y = -1; y <= 1; y++)
+                        for (int z = -1; z <= 1; z++)
+                        {
+                            if(!(x == 0 && y==0 && z == 0))
+                            {
+                                Vector3 neighbour = new Vector3(blockPos.x + x, blockPos.y + y, blockPos.z + z);
+                                DrawBlock(neighbour);
+                            }
+                        }
+            }
+        }
 	}
 }
