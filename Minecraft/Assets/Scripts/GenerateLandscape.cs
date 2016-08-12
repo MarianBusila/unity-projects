@@ -3,13 +3,23 @@ using System.Collections;
 
 public class Block
 {
-    public int type;
+    public enum Type
+    {
+        Snow,
+        Grass,
+        Sand,
+        Cloud,
+        Diamond
+    };
+    public Type type;
     public bool vis;
+    public GameObject block;
 
-    public Block(int t, bool v)
+    public Block(Type t, bool v, GameObject b)
     {
         type = t;
         vis  = v;
+        block = b;
     }
 }
 public class GenerateLandscape : MonoBehaviour {
@@ -19,11 +29,14 @@ public class GenerateLandscape : MonoBehaviour {
     public int height = 128;
 
     public int heightScale = 20;
+    public int heightOffset = 100;
     public float detailScale = 25.0f;
 
     public GameObject grassBlock;
     public GameObject sandBlock;
     public GameObject snowBlock;
+    public GameObject cloudBlock;
+    public GameObject diamondBlock;
 
     Block[,,] worldBlocks;
 
@@ -34,7 +47,7 @@ public class GenerateLandscape : MonoBehaviour {
         for (int z = 0; z < depth; z++)
             for (int x = 0; x < width; x++)
             {
-                int y = (int)(Mathf.PerlinNoise((x + seed) / detailScale, (z + seed) / detailScale) * heightScale);
+                int y = (int)(Mathf.PerlinNoise((x + seed) / detailScale, (z + seed) / detailScale) * heightScale) + heightOffset;
                 Vector3 blockPos = new Vector3(x, y, z);
 
                 CreateBlock(y, blockPos, true);
@@ -45,27 +58,58 @@ public class GenerateLandscape : MonoBehaviour {
                     CreateBlock(y, blockPos, false);
                 }
             }
+
+        DrawClouds(20, 100);        
+    }
+
+    void DrawClouds(int numCoulds, int cSize)
+    {
+        for(int i = 0; i < numCoulds; i++)
+        {
+            int xpos = Random.Range(0, width);
+            int zpos = Random.Range(0, depth);
+
+            for(int j = 0; j < cSize; j++)
+            {
+                Vector3 blockPos = new Vector3(xpos, height - 1, zpos);
+                GameObject newBlock = (GameObject)Instantiate(cloudBlock, blockPos, Quaternion.identity);
+                worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(Block.Type.Cloud, true, newBlock);
+                xpos += Random.Range(-1, 2);
+                zpos += Random.Range(-1, 2);
+                if (xpos < 0 || xpos >= width) xpos = width / 2;
+                if (zpos < 0 || zpos >= depth) zpos = depth / 2;
+            }
+        }
     }
 
     void CreateBlock(int y, Vector3 blockPos, bool create)
     {
-        if (y > heightScale / 4 * 3)
+        GameObject newBlock = null;
+        if (y > heightScale / 4 * 3 + heightOffset)
         {
             if (create)
-                Instantiate(snowBlock, blockPos, Quaternion.identity);
-            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(1, create);
+                newBlock = (GameObject)Instantiate(snowBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(Block.Type.Snow, create, newBlock);
         }
-        else if (y < heightScale / 4)
+        else if (y < heightScale / 4 + heightOffset)
         {
             if (create)
-                Instantiate(sandBlock, blockPos, Quaternion.identity);
-            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(3, create);
+                newBlock = (GameObject)Instantiate(sandBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(Block.Type.Sand, create, newBlock);
         }
         else
         {
             if (create)
-                Instantiate(grassBlock, blockPos, Quaternion.identity);
-            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(2, create);
+                newBlock = (GameObject)Instantiate(grassBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(Block.Type.Grass, create, newBlock);
+        }
+
+        //create diamond
+        if( y > heightOffset - 2 && y < heightOffset && Random.Range(0, 100) < 5)
+        {         
+            if(create)
+                newBlock = (GameObject)Instantiate(diamondBlock, blockPos, Quaternion.identity);
+            worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = new Block(Block.Type.Diamond, create, newBlock);
         }
     }
 
@@ -80,15 +124,21 @@ public class GenerateLandscape : MonoBehaviour {
 
         if (!worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis)
         {
+            GameObject newBlock = null;
             worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis = true;
-            if(worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 1)
-                Instantiate(snowBlock, blockPos, Quaternion.identity);
-            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 2)
-                Instantiate(grassBlock, blockPos, Quaternion.identity);
-            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == 3)
-                Instantiate(sandBlock, blockPos, Quaternion.identity);
+            if(worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == Block.Type.Snow)
+                newBlock = (GameObject)Instantiate(snowBlock, blockPos, Quaternion.identity);
+            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == Block.Type.Grass)
+                newBlock = (GameObject)Instantiate(grassBlock, blockPos, Quaternion.identity);
+            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == Block.Type.Sand)
+                newBlock = (GameObject)Instantiate(sandBlock, blockPos, Quaternion.identity);
+            else if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].type == Block.Type.Diamond)
+                newBlock = (GameObject)Instantiate(diamondBlock, blockPos, Quaternion.identity);
             else
                 worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].vis = false;
+
+            if(newBlock != null)
+                worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].block = newBlock;
         }
 
     }
