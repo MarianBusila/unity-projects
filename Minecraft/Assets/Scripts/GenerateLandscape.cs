@@ -59,7 +59,8 @@ public class GenerateLandscape : MonoBehaviour {
                 }
             }
 
-        DrawClouds(20, 100);        
+        DrawClouds(20, 100);
+        DigMines(5, 500);
     }
 
     void DrawClouds(int numCoulds, int cSize)
@@ -80,6 +81,63 @@ public class GenerateLandscape : MonoBehaviour {
                 if (zpos < 0 || zpos >= depth) zpos = depth / 2;
             }
         }
+    }
+
+    void DigMines(int numMines, int mSize)
+    {
+        int holSize = 2;
+        for(int i = 0; i < numMines; i++)
+        {
+            int xpos = Random.Range(10, width-10);
+            int ypos = Random.Range(10, height - 10);
+            int zpos = Random.Range(10, depth - 10);
+
+            for(int j = 0; j < mSize; j++)
+            {
+                for(int x = -holSize; x <= holSize; x++)
+                    for (int y = -holSize; y <= holSize; y++)
+                        for (int z = -holSize; z <= holSize; z++)
+                        {
+                            if(!(x == 0 && y == 0 && z == 0))
+                            {
+                                Vector3 blockPos = new Vector3(xpos + x, ypos + y, zpos + z);
+                                if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] != null)
+                                    if (worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].block != null)
+                                        Destroy(worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z].block);
+                                worldBlocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = null;
+                            }
+                        }
+
+                xpos += Random.Range(-1, 2);
+                ypos += Random.Range(-1, 2);
+                zpos += Random.Range(-1, 2);
+
+                if (xpos < holSize || xpos >= width - holSize) xpos = width / 2;
+                if (ypos < holSize || ypos >= height - holSize) ypos = height / 2;
+                if (zpos < holSize || zpos >= depth - holSize) zpos = depth / 2;
+            }
+        }
+
+        for(int z = 1; z < depth - 1; z++)
+            for(int x = 1; x < width - 1; x++)
+                for(int y = 1; y < height -1; y++)
+                {
+                    if(worldBlocks[x, y, z] == null)
+                    {
+                        for(int x1 = -1; x1 < 1; x1++)
+                            for (int y1 = -1; y1 < 1; y1++)
+                                for (int z1 = -1; z1 < 1; z1++)
+                                {
+                                    if(!(x1 == 0 && y1 == 0 && z1 == 0))
+                                    {
+                                        Vector3 neighbour = new Vector3(x + x1, y + y1, z + z1);
+                                        DrawBlock(neighbour);
+                                    }
+                                }
+                    }
+                }
+
+
     }
 
     void CreateBlock(int y, Vector3 blockPos, bool create)
