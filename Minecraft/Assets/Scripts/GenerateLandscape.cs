@@ -24,8 +24,8 @@ public class Block
 }
 public class GenerateLandscape : MonoBehaviour {
 
-    public int width = 128;
-    public int depth = 128;
+    public int width = 64;
+    public int depth = 64;
     public int height = 128;
 
     public int heightScale = 20;
@@ -229,6 +229,32 @@ public class GenerateLandscape : MonoBehaviour {
                             }
                         }
             }
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0));
+            if (Physics.Raycast(ray, out hit, 1000.0f))
+            {
+                Vector3 blockPos = hit.transform.position;
+                Vector3 hitVector = blockPos - hit.point;
+                Debug.Log("HitVector: (" + hitVector.x + ", " + hitVector.y + ", " + hitVector.z + ")");
+
+                hitVector.x = Mathf.Abs(hitVector.x);
+                hitVector.y = Mathf.Abs(hitVector.y);
+                hitVector.z = Mathf.Abs(hitVector.z);
+
+                if (hitVector.x > hitVector.y && hitVector.x > hitVector.z)
+                    blockPos.x -= (int)Mathf.RoundToInt(ray.direction.x);
+                else if (hitVector.y > hitVector.x && hitVector.y > hitVector.z)
+                    blockPos.y -= (int)Mathf.RoundToInt(ray.direction.y);
+                else
+                    blockPos.z -= (int)Mathf.RoundToInt(ray.direction.z);
+
+                CreateBlock((int)blockPos.y, blockPos, true);
+            }
+
         }
 	}
 }
