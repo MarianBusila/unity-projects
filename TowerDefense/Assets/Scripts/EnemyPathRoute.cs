@@ -7,6 +7,7 @@ public class EnemyPathRoute : MonoBehaviour {
     public float moveSpeed = 2.0f;
     private int currentTargetIndex = 0;
     private bool reachedEndTarget = false;
+    public int damageAmount = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +49,12 @@ public class EnemyPathRoute : MonoBehaviour {
     {
         Debug.Log("Reached destination");
         reachedEndTarget = true;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<Health>().TakeDamage(damageAmount);
+        }
+
         Destroy(gameObject);
     }
 }
