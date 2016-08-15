@@ -47,7 +47,7 @@ public class EnemyPathRoute : MonoBehaviour {
 
     void EnemySuccess()
     {
-        Debug.Log("Reached destination");
+        //Debug.Log("Reached destination");
         reachedEndTarget = true;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
