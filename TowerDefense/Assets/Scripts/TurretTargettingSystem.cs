@@ -10,10 +10,14 @@ public class TurretTargettingSystem : MonoBehaviour {
     enum TurretState { Disabled, Idle, LockingOn, Engaged };
     TurretState currentTurretState;
 
+    public float delayBetweenFire = 1f;
+    float fireCooldown;
+
     void Start()
     {
         enemyGameObjects = new ArrayList();
         currentTurretState = TurretState.Idle;
+        fireCooldown = Time.time;
     }
 
     void Update()
@@ -62,8 +66,8 @@ public class TurretTargettingSystem : MonoBehaviour {
         if(enemyGameObjects.Count > 0)
         {
             int neareastEnemyIndex = GetNearestEnemyIndex();
-            Debug.Log("Neareast enemy: " + neareastEnemyIndex);
-            currentTarget = (GameObject)enemyGameObjects[neareastEnemyIndex];
+            //Debug.Log("Neareast enemy: " + neareastEnemyIndex);
+            currentTarget = (GameObject)enemyGameObjects[0];
             currentTurretState = TurretState.LockingOn;
         }
     }
@@ -99,15 +103,35 @@ public class TurretTargettingSystem : MonoBehaviour {
 
     void LookAtTarget()
     {
-
-        Vector3 targetPosition = currentTarget.transform.position;
-        targetPosition.y = transform.position.y;
-        transform.LookAt(targetPosition);
+        if (currentTarget != null)
+        {
+            Vector3 targetPosition = currentTarget.transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
 
     }
     void MaybeFire()
     {
-
+        if (Time.time > fireCooldown)
+        {
+            fireCooldown = Time.time + delayBetweenFire;
+            if (currentTarget != null)
+            {
+                EnemyHealth enemyHealth = currentTarget.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(20);
+                    if(enemyHealth.GetCurrentHealth() <= 0)
+                    {
+                        currentTarget = null;
+                        currentTurretState = TurretState.Idle;
+                        enemyGameObjects.Remove(enemyHealth.gameObject);
+                        enemyHealth.Die();
+                    }
+                }
+            }
+        }
     }
 
 }
