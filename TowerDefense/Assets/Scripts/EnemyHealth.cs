@@ -5,7 +5,8 @@ public class EnemyHealth : MonoBehaviour {
 
     public int maxHealth = 100;
     int currentHealth;
-    RectTransform healthRectTransform;    
+    RectTransform healthRectTransform;
+    public GameObject explosionPrefab;
 
     void Start()
     {
@@ -28,7 +29,10 @@ public class EnemyHealth : MonoBehaviour {
     public void Die()
     {
         Debug.Log("Enemy died");
-        //TODO play an explosion
+        GameObject explosionGO = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+        ParticleSystem explosionParticleSystem = explosionGO.GetComponent<ParticleSystem>();
+        float totalDuration = explosionParticleSystem.startLifetime + explosionParticleSystem.duration;
         Destroy(gameObject);
+        Destroy(explosionGO, totalDuration);
     }
 }
