@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TurretTargettingSystem : MonoBehaviour {
+public abstract class TurretTargettingSystem : MonoBehaviour {
 
     public ArrayList enemyGameObjects;
-    GameObject currentTarget;
+    protected GameObject currentTarget;
     public int turretSpeed = 2;
 
-    enum TurretState { Disabled, Idle, LockingOn, Engaged };
-    TurretState currentTurretState;
+    protected enum TurretState { Disabled, Idle, LockingOn, Engaged };
+    protected TurretState currentTurretState;
 
     public float delayBetweenFire = 1f;
-    float fireCooldown;
+    protected float fireCooldown;
 
-    void Start()
+    protected virtual void Start()
     {
         enemyGameObjects = new ArrayList();
-        currentTurretState = TurretState.Idle;
+        SetCurrentTurretState(TurretState.Idle);
         fireCooldown = Time.time;
     }
 
@@ -56,7 +56,7 @@ public class TurretTargettingSystem : MonoBehaviour {
             if(currentTarget == collider.gameObject)
             {
                 currentTarget = null;
-                currentTurretState = TurretState.Idle;
+                SetCurrentTurretState(TurretState.Idle);
             }
         }
     }
@@ -68,7 +68,7 @@ public class TurretTargettingSystem : MonoBehaviour {
             int neareastEnemyIndex = GetNearestEnemyIndex();
             //Debug.Log("Neareast enemy: " + neareastEnemyIndex);
             currentTarget = (GameObject)enemyGameObjects[0];
-            currentTurretState = TurretState.LockingOn;
+            SetCurrentTurretState(TurretState.LockingOn);
         }
     }
 
@@ -98,7 +98,7 @@ public class TurretTargettingSystem : MonoBehaviour {
 
         float remainingRotation = Mathf.Abs(Quaternion.LookRotation(transform.forward).eulerAngles.y - Quaternion.LookRotation(targetDirection).eulerAngles.y);
         if (remainingRotation < 2.5f)
-            currentTurretState = TurretState.Engaged;
+            SetCurrentTurretState(TurretState.Engaged);
     }
 
     void LookAtTarget()
@@ -111,27 +111,18 @@ public class TurretTargettingSystem : MonoBehaviour {
         }
 
     }
-    void MaybeFire()
+
+    protected void SetCurrentTurretState(TurretState state)
     {
-        if (Time.time > fireCooldown)
-        {
-            fireCooldown = Time.time + delayBetweenFire;
-            if (currentTarget != null)
-            {
-                EnemyHealth enemyHealth = currentTarget.GetComponent<EnemyHealth>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.TakeDamage(20);
-                    if(enemyHealth.GetCurrentHealth() <= 0)
-                    {
-                        currentTarget = null;
-                        currentTurretState = TurretState.Idle;
-                        enemyGameObjects.Remove(enemyHealth.gameObject);
-                        enemyHealth.Die();
-                    }
-                }
-            }
-        }
+        currentTurretState = state;
+        if (currentTurretState == TurretState.Engaged)
+            EngagedTarget();
+        else
+            DisengagedTarget();
     }
+    abstract protected void MaybeFire();
+    abstract protected void EngagedTarget();
+    abstract protected void DisengagedTarget();
+    
 
 }
