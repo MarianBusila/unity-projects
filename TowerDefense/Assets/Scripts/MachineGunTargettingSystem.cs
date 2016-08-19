@@ -4,9 +4,11 @@ using System.Collections;
 public class MachineGunTargettingSystem : TurretTargettingSystem {
 
     GameObject muzzleFlashParticleSystem;
+    AudioSource audioSource;
 	// Use this for initialization
 	override protected void Start () {
         muzzleFlashParticleSystem = transform.Find("MuzzleFlash").gameObject;
+        audioSource = GetComponent<AudioSource>();
         base.Start();
 	}
 
@@ -36,9 +38,12 @@ public class MachineGunTargettingSystem : TurretTargettingSystem {
     override protected void EngagedTarget()
     {
         muzzleFlashParticleSystem.SetActive(true);
+        audioSource.loop = true;
+        audioSource.Play();
     }
     override protected void DisengagedTarget()
     {
         muzzleFlashParticleSystem.SetActive(false);
+        audioSource.loop = false;
     }
 }
