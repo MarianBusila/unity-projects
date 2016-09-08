@@ -4,10 +4,10 @@ using System.Collections;
 public abstract class TurretTargettingSystem : MonoBehaviour {
 
     public ArrayList enemyGameObjects;
-    protected GameObject currentTarget;
+    public GameObject currentTarget;
     public int turretSpeed = 2;
 
-    protected enum TurretState { Disabled, Idle, LockingOn, Engaged };
+    public enum TurretState { Disabled, Idle, LockingOn, Engaged };
     protected TurretState currentTurretState;
 
     public float delayBetweenFire = 1f;
@@ -112,7 +112,7 @@ public abstract class TurretTargettingSystem : MonoBehaviour {
 
     }
 
-    protected void SetCurrentTurretState(TurretState state)
+    public void SetCurrentTurretState(TurretState state)
     {
         currentTurretState = state;
         if (currentTurretState == TurretState.Engaged)
