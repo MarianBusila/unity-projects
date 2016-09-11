@@ -14,18 +14,19 @@ public class LaserGunTargettingSystem : TurretTargettingSystem {
 
     override protected void MaybeFire()
     {
-        EnemyHealth enemyHealth = currentTarget.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
+        if (currentTarget != null)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
-            lineRenderer.SetPosition(1, new Vector3(0f, 0f, distanceToTarget - 0.5f));
-        }
+            EnemyHealth enemyHealth = currentTarget.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
+                lineRenderer.SetPosition(1, new Vector3(0f, 0f, distanceToTarget - 0.5f));
+            }
 
-        if (Time.time > fireCooldown)
-        {
-            fireCooldown = Time.time + delayBetweenFire;
-            if (currentTarget != null)
-            {               
+
+            if (Time.time > fireCooldown)
+            {
+                fireCooldown = Time.time + delayBetweenFire;
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(10);
