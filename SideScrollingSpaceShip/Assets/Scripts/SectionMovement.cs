@@ -4,6 +4,7 @@ using System.Collections;
 public class SectionMovement : MonoBehaviour {
 
     public GameObject sectionPrefab;
+    public GameObject obstaclePrefab;
     public int numSections = 10;
     public float sectionSize = 6f;
     public float speed = 0.25f;
@@ -13,9 +14,15 @@ public class SectionMovement : MonoBehaviour {
 	void Start () {
         sections = new GameObject[numSections];
 
-        for(int i = 0; i < numSections; i++)
+        for (int i = 0; i < numSections; i++)
         {
-            sections[i] = Instantiate(sectionPrefab, new Vector3(0, 0, i * sectionSize), sectionPrefab.transform.rotation) as GameObject;
+            int randomX = Random.Range(-2, 2);
+            int randomY = Random.Range(0, 4);
+            Vector3 sectionPos = new Vector3(0, 0, i * sectionSize);
+            sections[i] = Instantiate(sectionPrefab, sectionPos, sectionPrefab.transform.rotation) as GameObject;
+            Vector3 obstaclePos = sectionPos + new Vector3(randomX, randomY, 0);
+            GameObject obstacle = Instantiate(obstaclePrefab, obstaclePos, obstaclePrefab.transform.rotation) as GameObject;
+            obstacle.transform.parent = sections[i].transform;
             sections[i].name = "Section_" + i;
         }
 	
