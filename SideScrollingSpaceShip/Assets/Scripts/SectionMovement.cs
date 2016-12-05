@@ -9,9 +9,13 @@ public class SectionMovement : MonoBehaviour {
     public float sectionSize = 6f;
     public float speed = 0.25f;
 
+    private ScoreController sc;
+    private float lastScoreUpdate = 0;
+
     GameObject[] sections; 
 	// Use this for initialization
 	void Start () {
+        sc = GetComponent<ScoreController>();
         sections = new GameObject[numSections];
 
         for (int i = 0; i < numSections; i++)
@@ -41,10 +45,15 @@ public class SectionMovement : MonoBehaviour {
                         maxZ = sections[j].transform.position.z;
                 }
                 sections[i].transform.position = new Vector3(sections[i].transform.position.x, sections[i].transform.position.y, maxZ + sectionSize);
-                break;
+                //break;
 
             }
             sections[i].transform.Translate(Vector3.forward * Time.deltaTime * -speed);
+        }
+        if(sc.Score - lastScoreUpdate > 100)
+        {
+            lastScoreUpdate = sc.Score;
+            speed += 0.1f;
         }
 	}
 }
