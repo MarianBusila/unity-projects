@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Interactable : MonoBehaviour {
     [HideInInspector]
-    public NavMeshAgent playerAgent;
+    public UnityEngine.AI.NavMeshAgent playerAgent;
     private bool hasInteracted;
 
-	public virtual void MoveToInteraction(NavMeshAgent playerAgent)
+	public virtual void MoveToInteraction(UnityEngine.AI.NavMeshAgent playerAgent)
     {
         hasInteracted = false;
         this.playerAgent = playerAgent;
