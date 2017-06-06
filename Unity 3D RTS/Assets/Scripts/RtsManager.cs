@@ -11,6 +11,14 @@ public class RtsManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Current = this;
+
+        foreach(var p in Players)
+        {
+            foreach(var u in p.StartingUnits)
+            {
+                GameObject.Instantiate(u, p.Location.position, p.Location.rotation);
+            }
+        }
 	}
 	
 	// Update is called once per frame
