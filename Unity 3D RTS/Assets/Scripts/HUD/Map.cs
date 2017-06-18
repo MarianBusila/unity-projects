@@ -6,10 +6,17 @@ public class Map : MonoBehaviour {
 
     public RectTransform ViewPort;
     public Transform Corner1, Corner2;
+    public GameObject BlipPrefab;
+    public static Map Current;
 
     private Vector2 terrainSize;
 
     private RectTransform mapRect;
+
+    public Map()
+    {
+        Current = this;
+    }
 
 	// Use this for initialization
 	void Start ()
