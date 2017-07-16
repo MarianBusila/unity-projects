@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CreateBuildingAction : ActionBehaviour
 {
+    public float Cost = 0;
     public GameObject BuildingPrefab;
     public float MaxBuildDistance = 30;
 
@@ -15,11 +16,17 @@ public class CreateBuildingAction : ActionBehaviour
     {
         return delegate()
         {
+            var player = GetComponent<Player>().Info;
+            if(player.Credits < Cost)
+            {
+                Debug.Log("Not enough credits");
+                return;
+            }
             var go = GameObject.Instantiate(GhostBuildingPrefab);
             var finder = go.AddComponent<FindBuildingSite>();
             finder.BuildingPrefab = BuildingPrefab;
             finder.MaxBuildDistance = MaxBuildDistance;
-            finder.Info = GetComponent<Player>().Info;
+            finder.Info = player;
             finder.Source = transform;
             active = go;
         };
