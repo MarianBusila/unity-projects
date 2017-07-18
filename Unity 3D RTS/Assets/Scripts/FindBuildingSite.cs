@@ -42,6 +42,7 @@ public class FindBuildingSite : MonoBehaviour {
             if(Input.GetMouseButton(0))
             {
                 var go = GameObject.Instantiate(BuildingPrefab);
+                go.AddComponent<ActionSelect>();
                 go.transform.position = transform.position;
                 Info.Credits -= Cost;
                 go.AddComponent<Player>().Info = Info;
