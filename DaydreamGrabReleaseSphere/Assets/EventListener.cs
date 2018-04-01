@@ -19,4 +19,15 @@ public class EventListener : MonoBehaviour {
     {
         _renderer.material.color = Color.white;
     }
+
+    public void OnGrab()
+    {
+        Transform pointerTransform = GvrPointerInputModule.Pointer.PointerTransform;
+        transform.SetParent(pointerTransform, true);
+    }
+
+    public void OnRelease()
+    {
+        transform.SetParent(null, true);
+    }
 }
