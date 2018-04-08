@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 135557082413745086}
   - component: {fileID: 23000399520018162}
   - component: {fileID: 54814340385076534}
+  - component: {fileID: 114261250576026510}
+  - component: {fileID: 114884269097708862}
   m_Layer: 0
   m_Name: Cannonball
   m_TagString: Untagged
@@ -99,6 +101,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &114261250576026510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300764730650122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551e6eac0ecfe6b4a81049819df8be92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114884269097708862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300764730650122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ed4095a4ccc254daee28c1876202b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightedColor: {r: 0, g: 1, b: 0, a: 1}
+  touchedColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!135 &135557082413745086
 SphereCollider:
   m_ObjectHideFlags: 1
