@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour {
     private float _force = 20;
+    private const float RotationalVelocity = 50;
 
     protected Vector3 Velocity
     {
@@ -22,4 +23,22 @@ public class Cannon : MonoBehaviour {
         // apply the velocity
         cannonballRigidbody.AddForce(Velocity, ForceMode.VelocityChange);
 	}
+
+    public void RotateClockwise()
+    {
+        Rotate(0, RotationalVelocity);
+    }
+
+    public void RotateCounterClockwise()
+    {
+        Rotate(0, -RotationalVelocity);
+    }
+
+    private void Rotate(float x, float y)
+    {
+        Vector3 transformEulerAngles = transform.eulerAngles;
+        transformEulerAngles.x += x * Time.deltaTime;
+        transformEulerAngles.y += y * Time.deltaTime;
+        transform.eulerAngles = transformEulerAngles;
+    }
 }
