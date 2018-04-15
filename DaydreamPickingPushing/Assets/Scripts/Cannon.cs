@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour {
     private float _force = 20;
     private const float RotationalVelocity = 50;
+    private LineRenderer _lineRenderer;
 
     protected Vector3 Velocity
     {
@@ -12,8 +13,39 @@ public class Cannon : MonoBehaviour {
     }
 
     public GameObject cannonballPrefab;
-	
-	public void Fire () {
+
+    void Start()
+    {
+        // get the line renderer for the trajectory simulation
+        _lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void Update()
+    {
+        const int numberOfPositionsToSimulate = 50;
+        const float timestampBetweenPositions = 0.2f;
+
+        // setup the initial conditions
+        Vector3 simulatePosition = transform.position;
+        Vector3 simulatedVelocity = Velocity;
+
+        // update the position count
+        _lineRenderer.positionCount = numberOfPositionsToSimulate;
+
+        for(int i = 0; i < numberOfPositionsToSimulate; i++)
+        {
+            // set each position of the line renderer
+            _lineRenderer.SetPosition(i, simulatePosition);
+
+            // change the velocity based on Gravity and the time step
+            simulatedVelocity += Physics.gravity * timestampBetweenPositions;
+
+            // change the position based on Gravity and the time step
+            simulatePosition += simulatedVelocity * timestampBetweenPositions;
+        }
+    }
+
+    public void Fire () {
         // create a cannonball at the current position and rotation
         GameObject ball = Instantiate(cannonballPrefab, transform.position, transform.rotation);
 
