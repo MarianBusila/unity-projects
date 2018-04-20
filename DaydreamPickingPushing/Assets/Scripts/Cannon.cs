@@ -66,6 +66,16 @@ public class Cannon : MonoBehaviour {
         Rotate(0, -RotationalVelocity);
     }
 
+    public void RotateUp()
+    {
+        Rotate(-RotationalVelocity, 0);
+    }
+
+    public void RotateDown()
+    {
+        Rotate(RotationalVelocity, 0);
+    }
+
     private void Rotate(float x, float y)
     {
         Vector3 transformEulerAngles = transform.eulerAngles;
