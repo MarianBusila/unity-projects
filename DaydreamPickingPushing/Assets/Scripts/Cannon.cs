@@ -6,6 +6,7 @@ public class Cannon : MonoBehaviour {
     private float _force = 20;
     private const float RotationalVelocity = 50;
     private LineRenderer _lineRenderer;
+    private const float ForceChangeVelocity = 20;
 
     protected Vector3 Velocity
     {
@@ -74,6 +75,16 @@ public class Cannon : MonoBehaviour {
     public void RotateDown()
     {
         Rotate(RotationalVelocity, 0);
+    }
+
+    public void IncreaseForce()
+    {
+        _force += Time.deltaTime * ForceChangeVelocity;
+    }
+
+    public void DecreaseForce()
+    {
+        _force -= Time.deltaTime * ForceChangeVelocity;
     }
 
     private void Rotate(float x, float y)
