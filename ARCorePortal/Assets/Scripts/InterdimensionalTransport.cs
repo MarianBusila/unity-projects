@@ -10,9 +10,15 @@ public class InterdimensionalTransport : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         // we are outside at the beginning
+        SetMaterials(false);
+    }
+
+    void SetMaterials(bool fullRender)
+    {
+        var stencilTest = fullRender ? CompareFunction.NotEqual : CompareFunction.Equal;
         foreach (var material in materials)
         {
-            material.SetInt("_StencilTest", (int)CompareFunction.Equal);
+            material.SetInt("_StencilTest", (int)stencilTest);
         }
     }
 
@@ -28,27 +34,19 @@ public class InterdimensionalTransport : MonoBehaviour
         if (transform.position.z > other.transform.position.z)
         {
             Debug.Log("Outside of other world");
-            stencilTest = (int)CompareFunction.Equal;
+            SetMaterials(false);
         }
         else
         {
             Debug.Log("Inside of the other world");
-            stencilTest = (int)CompareFunction.NotEqual;
-        }
-
-        foreach (var material in materials)
-        {
-            material.SetInt("_StencilTest", stencilTest);
+            SetMaterials(true);
         }
     }
 
     private void OnDestroy()
     {
         // after we end the game, we want to see our objects with that material inside Unity editor
-        foreach (var material in materials)
-        {
-            material.SetInt("_StencilTest", (int)CompareFunction.NotEqual);
-        }
+        SetMaterials(true);
     }
 
     // Update is called once per frame
