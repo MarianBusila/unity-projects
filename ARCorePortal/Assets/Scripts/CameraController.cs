@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    private float yaw = 0f;
+    private float speed = 0.5f;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +14,11 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-	}
+        // movement on X/Z
+        transform.Translate(speed * Input.GetAxis("Horizontal"), 0, speed * Input.GetAxis("Vertical"));
+
+        // rotation
+        yaw += Input.GetAxis("Mouse X");        
+        transform.eulerAngles = new Vector3(0f, yaw, 0f);
+    }
 }
