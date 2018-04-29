@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Portal : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Portal : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         // we are outside at the beginning
+        inOtherWorld = false;
         SetMaterials(false);
     }
 
@@ -34,22 +36,22 @@ public class Portal : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.transform != device)
         {
             return;
         }
 
         wasInFront = GetIsInFront();
-        Debug.Log("OnTriggerEnter. wasInFront: " + wasInFront);
+        Debug.Log("OnTriggerEnter. wasInFront: " + wasInFront);        
     }
 
     private void OnTriggerStay(Collider other)
-    {
+    {        
         if (other.transform != device)
         {
             return;
-        }
+        }        
 
         bool isInFront = GetIsInFront();
         Debug.Log("OnTriggerStay. isInFront:" + isInFront + ", wasInFront" + wasInFront);
@@ -70,6 +72,6 @@ public class Portal : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
-		
+        
 	}
 }
