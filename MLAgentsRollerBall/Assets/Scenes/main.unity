@@ -225,6 +225,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17dc06363770e64f8688c1e214d61ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brain: {fileID: 482527674}
+  agentParameters:
+    agentCameras: []
+    maxStep: 0
+    resetOnDone: 1
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
+  speed: 2
+  Target: {fileID: 1766612156}
 --- !u!1 &482527672
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,13 +275,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 8
     numStackedVectorObservations: 1
-    vectorActionSize: 1
+    vectorActionSize: 2
     cameraResolutions: []
     vectorActionDescriptions:
     - 
-    vectorActionSpaceType: 0
+    - 
+    vectorActionSpaceType: 1
     vectorObservationSpaceType: 1
   brainType: 0
   CoreBrains:
@@ -713,7 +723,19 @@ MonoBehaviour:
   m_Name: (Clone)
   m_EditorClassIdentifier: 
   broadcast: 1
-  continuousPlayerActions: []
+  continuousPlayerActions:
+  - key: 100
+    index: 0
+    value: 1
+  - key: 97
+    index: 0
+    value: -1
+  - key: 119
+    index: 1
+    value: 1
+  - key: 115
+    index: 1
+    value: -1
   discretePlayerActions: []
   defaultAction: 0
   brain: {fileID: 482527674}
