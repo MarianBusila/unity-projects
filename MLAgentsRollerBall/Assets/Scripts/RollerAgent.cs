@@ -88,5 +88,8 @@ public class RollerAgent : Agent {
         controlSignal.x = Mathf.Clamp(vectorAction[0], -1, 1);
         controlSignal.z = Mathf.Clamp(vectorAction[1], -1, 1);
         rigidbody.AddForce(controlSignal * speed);
+
+        Monitor.Log("Cumulative reward", this.GetCumulativeReward());
+        Monitor.Log("Step count", this.GetStepCount());
     }
 }
