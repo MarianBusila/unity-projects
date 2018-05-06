@@ -7,6 +7,9 @@ public class RollerAgent : Agent {
     Rigidbody rigidbody;
     float previousDistance = float.MaxValue;
 
+    private int wins = 0;
+    private int fails = 0;
+
     public float speed = 2.0f;
     public Transform Target;
     
@@ -24,12 +27,16 @@ public class RollerAgent : Agent {
             this.transform.position = Vector3.zero;
             this.rigidbody.angularVelocity = Vector3.zero;
             this.rigidbody.velocity = Vector3.zero;
+            fails++;
         }
         else
         {
             // move the target to a new spot between [-4, 4] coordinates on x and z
             this.Target.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
+            wins++;
         }
+        Monitor.Log("Wins", wins);
+        Monitor.Log("Fails", fails);
     }
 
     public override void CollectObservations()
@@ -37,18 +44,22 @@ public class RollerAgent : Agent {
         /* Position of the target. In general, it is better to use the relative position of other objects rather than the absolute position for more generalizable training. 
          Note that the agent only collects the x and z coordinates since the floor is aligned with the x-z plane and the y component of the target's position never changes */
         Vector3 relativePosition = Target.position - this.transform.position;
-        AddVectorObs(relativePosition.x / 5);
-        AddVectorObs(relativePosition.z / 5);
+        AddVectorObs(relativePosition.x);
+        AddVectorObs(relativePosition.z);
 
         // Position of the agent itself within the confines of the floor. This data is collected as the agent's distance from each edge of the floor.
-        AddVectorObs((this.transform.position.x + 5) / 5);
-        AddVectorObs((this.transform.position.x - 5) / 5);
-        AddVectorObs((this.transform.position.z + 5) / 5);
-        AddVectorObs((this.transform.position.z - 5) / 5);
+        //AddVectorObs((this.transform.position.x + 5) / 5);
+        //AddVectorObs((this.transform.position.x - 5) / 5);
+        //AddVectorObs((this.transform.position.z + 5) / 5);
+        //AddVectorObs((this.transform.position.z - 5) / 5);
+
+        //distance to center of the platform
+        AddVectorObs(this.transform.position.x);
+        AddVectorObs(this.transform.position.z);
 
         // the velocity of the agent.This helps the agent learn to control its speed so it doesn't overshoot the target and roll off the platform.
-        AddVectorObs(rigidbody.velocity.x / 5);
-        AddVectorObs(rigidbody.velocity.z / 5);
+        AddVectorObs(rigidbody.velocity.x);
+        AddVectorObs(rigidbody.velocity.z);
     }
 
     // AgentAction receives the decision from the Brain
@@ -61,7 +72,7 @@ public class RollerAgent : Agent {
         if(distanceToTarget < 1.42f)
         {
             Done();
-            AddReward(1.0f);
+            AddReward(10.0f);
         }
 
         // getting closer
@@ -76,7 +87,7 @@ public class RollerAgent : Agent {
         if(this.transform.position.y < -1.0f)
         {
             Done();
-            AddReward(-1.0f);
+            AddReward(-12.0f);
         }
 
         previousDistance = distanceToTarget;
