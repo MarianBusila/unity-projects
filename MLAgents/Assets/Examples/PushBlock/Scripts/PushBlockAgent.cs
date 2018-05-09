@@ -36,8 +36,20 @@ public class PushBlockAgent : Agent {
 
     public override void InitializeAgent()
     {
-        //cache the agent rigidbody
+        goalDetect = block.GetComponent<GoalDetect>();
+        goalDetect.agent = this;
+        rayPerception = GetComponent<RayPerception>();
+
+        // cache the agent rigidbody
         agentRB = GetComponent<Rigidbody>();
+        // cache the block rigidbody
+        blockRB = block.GetComponent<Rigidbody>();
+
+        areaBounds = ground.GetComponent<Collider>().bounds;
+        groundRenderer = ground.GetComponent<Renderer>();
+
+        // starting material
+        groundMaterial = groundRenderer.material;
     }
 
     public override void CollectObservations()
@@ -87,5 +99,10 @@ public class PushBlockAgent : Agent {
 
         transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
         agentRB.AddForce(dirToGo * academy.agentRunSpeed, ForceMode.VelocityChange);
+    }
+
+    public void IScoredAGoal()
+    {
+
     }
 }

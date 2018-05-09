@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class GoalDetect : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [HideInInspector]
+    // the associated agent
+    public PushBlockAgent agent;
+
+    void OnCollisionEnter(Collision col)
+    {
+        // touched gol
+        if(col.gameObject.CompareTag("goal"))
+        {
+            agent.IScoredAGoal();
+        }
+    }
 }
