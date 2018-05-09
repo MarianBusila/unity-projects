@@ -65,7 +65,14 @@ public class PushBlockAgent : Agent {
 
     public override void AgentReset()
     {
-        
+        int rotation = Random.Range(0, 4);
+        float rotationAngle = rotation * 90;
+        area.transform.Rotate(new Vector3(0f, rotationAngle, 0f));
+
+        ResetBlock();
+        transform.position = GetRandomSpawnPos();
+        agentRB.velocity = Vector3.zero;
+        agentRB.angularVelocity = Vector3.zero;
     }
 
     private void MoveAgent(float[] vectorAction)
@@ -103,6 +110,36 @@ public class PushBlockAgent : Agent {
 
     public void IScoredAGoal()
     {
+        AddReward(5f);
+        Done();
 
+    }
+
+    private void ResetBlock()
+    {
+        // get a random position for the block
+        block.transform.position = GetRandomSpawnPos();
+        blockRB.velocity = Vector3.zero;
+        blockRB.angularVelocity = Vector3.zero;
+    }
+
+    private Vector3 GetRandomSpawnPos()
+    {
+        bool foundNewSpawnLocation = false;
+        Vector3 randomSpawnPos = Vector3.zero;
+        while (foundNewSpawnLocation == false)
+        {
+            float randomPosX = Random.Range(-areaBounds.extents.x * academy.spawnAreaMarginMultiplier,
+                                areaBounds.extents.x * academy.spawnAreaMarginMultiplier);
+
+            float randomPosZ = Random.Range(-areaBounds.extents.z * academy.spawnAreaMarginMultiplier,
+                                            areaBounds.extents.z * academy.spawnAreaMarginMultiplier);
+            randomSpawnPos = ground.transform.position + new Vector3(randomPosX, 1f, randomPosZ);
+            if (Physics.CheckBox(randomSpawnPos, new Vector3(2.5f, 0.01f, 2.5f)) == false)
+            {
+                foundNewSpawnLocation = true;
+            }
+        }
+        return randomSpawnPos;
     }
 }
