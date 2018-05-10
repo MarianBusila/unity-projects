@@ -61,6 +61,7 @@ public class PushBlockAgent : Agent {
     {
         // move the agent using the action
         MoveAgent(vectorAction);
+
     }
 
     public override void AgentReset()
@@ -113,6 +114,15 @@ public class PushBlockAgent : Agent {
         AddReward(5f);
         Done();
 
+        // swap ground material for a bit to indicate we scored
+        StartCoroutine(GoalScoredSwapGroundMaterial(academy.goalScoredMaterial, 0.5f));
+    }
+
+    private IEnumerator GoalScoredSwapGroundMaterial(Material mat, float time)
+    {
+        groundRenderer.material = mat;
+        yield return new WaitForSeconds(time);
+        groundRenderer.material = groundMaterial;
     }
 
     private void ResetBlock()
