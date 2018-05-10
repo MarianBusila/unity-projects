@@ -54,7 +54,13 @@ public class PushBlockAgent : Agent {
 
     public override void CollectObservations()
     {
-        
+        float rayDistance = 12f;
+        float[] rayAngles = { 0f, 45f, 90f, 135f, 180f, 110f, 70f};
+        string[] detectableObjects = new string[] { "block", "goal", "wall"};
+        // foreach ray angle a vector of size detectableObjects + 2 is created. For example if goal is hit by spherecase, than the vector will be [0, 1, 0, 0, distance].
+        // if no object is hit, then [0, 0, 0, 1, 0]. Basically vector[3] is set to 1 if no object is hit, vector[4] is set to the distance when one object was hit and his index vector[ 0 - 2] is set to 1
+        AddVectorObs(rayPerception.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f));
+        AddVectorObs(rayPerception.Perceive(rayDistance, rayAngles, detectableObjects, 1.5f, 0f));
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
