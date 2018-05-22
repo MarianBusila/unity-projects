@@ -319,6 +319,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 632782730}
+  - component: {fileID: 632782731}
+  - component: {fileID: 632782732}
   m_Layer: 0
   m_Name: AgentA
   m_TagString: Untagged
@@ -341,6 +343,33 @@ Transform:
   m_Father: {fileID: 111098991}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+--- !u!54 &632782731
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632782729}
+  serializedVersion: 2
+  m_Mass: 4
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!65 &632782732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632782729}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &791914491
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +380,6 @@ GameObject:
   - component: {fileID: 791914492}
   - component: {fileID: 791914495}
   - component: {fileID: 791914494}
-  - component: {fileID: 791914493}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -372,18 +400,6 @@ Transform:
   m_Father: {fileID: 1507872200}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &791914493
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 791914491}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &791914494
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -478,6 +494,7 @@ GameObject:
   - component: {fileID: 1220150216}
   - component: {fileID: 1220150215}
   - component: {fileID: 1220150214}
+  - component: {fileID: 1220150217}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -552,6 +569,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1220150212}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &1220150217
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220150212}
+  serializedVersion: 2
+  m_Mass: 0.75
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 72
+  m_CollisionDetection: 0
 --- !u!1 &1286904748
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +666,6 @@ GameObject:
   - component: {fileID: 1395951270}
   - component: {fileID: 1395951273}
   - component: {fileID: 1395951272}
-  - component: {fileID: 1395951271}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -655,18 +686,6 @@ Transform:
   m_Father: {fileID: 632782730}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1395951271
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1395951269}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1395951272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -717,6 +736,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1507872200}
+  - component: {fileID: 1507872201}
+  - component: {fileID: 1507872202}
   m_Layer: 0
   m_Name: AgentB
   m_TagString: Untagged
@@ -739,6 +760,33 @@ Transform:
   m_Father: {fileID: 111098991}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+--- !u!54 &1507872201
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1507872199}
+  serializedVersion: 2
+  m_Mass: 4
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!65 &1507872202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1507872199}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1533469295
 GameObject:
   m_ObjectHideFlags: 0
