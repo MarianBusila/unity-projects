@@ -31,7 +31,7 @@ public class TennisArea : MonoBehaviour {
         }
 
         ball.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-        // ball.GetComponent<HitWall>().lastAgentHit = -1;
+        ball.GetComponent<HitWall>().lastAgentHit = -1;
     }
 
     private void FixedUpdate()
