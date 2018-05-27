@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TennisAgent : Agent {
 
-	
+    public int score;
 }
