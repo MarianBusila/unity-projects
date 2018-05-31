@@ -12,6 +12,12 @@ public class TennisAgent : Agent {
     public GameObject tennisArea;
     public GameObject ball;
 
+    private void Awake()
+    {
+        // There is one brain in the scene so this should find our brain.
+        brain = FindObjectOfType<Brain>();
+    }
+
     public override void CollectObservations()
     {
         // observations about the agent relative to the tennis area
