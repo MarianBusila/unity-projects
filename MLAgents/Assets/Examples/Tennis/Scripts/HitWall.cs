@@ -21,15 +21,17 @@ public class HitWall : MonoBehaviour
         TennisAgent agentB = area.agentB.GetComponent<TennisAgent>();
 
         // agent gets rewarded for hitting ball over the net
-        if (other.name == "over")
+        if (other.name == "Over")
         {
             if (lastAgentHit == 0)
             {
                 agentA.AddReward(0.1f);
+                // Debug.Log("AgentA hit ball over the net");
             }
             else
             {
                 agentB.AddReward(0.1f);
+                // Debug.Log("AgentB hit ball over the net");
             }
         }
     }
@@ -49,7 +51,7 @@ public class HitWall : MonoBehaviour
                 // agentA is the last who touched the ball
                 if (lastAgentHit == 0)
                 {
-                    Debug.Log("The ball hit the back wall or net and agentA was the last to touch the ball");
+                    //Debug.Log("The ball hit the back wall or net and agentA was the last to touch the ball");
                     agentA.AddReward(-0.01f);
                     agentB.SetReward(0);
                     agentB.score += 1;
@@ -57,7 +59,7 @@ public class HitWall : MonoBehaviour
                 // agentB is the last who touched the ball
                 else
                 {
-                    Debug.Log("The ball hit the back wall or net and agentB was the last to touch the ball");
+                    //Debug.Log("The ball hit the back wall or net and agentB was the last to touch the ball");
                     agentA.SetReward(0);
                     agentB.SetReward(-0.01f);
                     agentA.score += 1;
@@ -65,7 +67,7 @@ public class HitWall : MonoBehaviour
             }
             else if (collision.gameObject.name == "FloorA")
             {
-                Debug.Log("The ball hit floorA");
+                //Debug.Log("The ball hit floorA");
                 // ball touched floor A
                 agentA.AddReward(-0.01f);
                 agentB.SetReward(0);
@@ -73,7 +75,7 @@ public class HitWall : MonoBehaviour
             }
             else if (collision.gameObject.name == "FloorB")
             {
-                Debug.Log("The ball hit floorB");
+                //Debug.Log("The ball hit floorB");
                 // ball touched floor B
                 agentB.AddReward(-0.01f);
                 agentA.SetReward(0);
@@ -87,7 +89,7 @@ public class HitWall : MonoBehaviour
 
         if(collision.gameObject.tag == "agent")
         {
-            Debug.Log("An agent hit the ball");
+            // Debug.Log("An agent hit the ball");
             lastAgentHit = collision.gameObject.name == "AgentA" ? 0 : 1;
         }
     }

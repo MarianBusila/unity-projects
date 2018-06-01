@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TennisAgent : Agent {
 
@@ -11,6 +12,7 @@ public class TennisAgent : Agent {
 
     public GameObject tennisArea;
     public GameObject ball;
+    public GameObject scoreText;
 
     private void Awake()
     {
@@ -45,7 +47,9 @@ public class TennisAgent : Agent {
         }
 
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(moveX * 50f, gameObject.GetComponent<Rigidbody>().velocity.y, 0f);
-        Debug.Log("VelocityX: " + gameObject.GetComponent<Rigidbody>().velocity.x + ", VelocityY: " + gameObject.GetComponent<Rigidbody>().velocity.y);        
+        // Debug.Log("VelocityX: " + gameObject.GetComponent<Rigidbody>().velocity.x + ", VelocityY: " + gameObject.GetComponent<Rigidbody>().velocity.y);
+
+        scoreText.GetComponent<Text>().text = score.ToString();
     }
 
     public override void AgentReset()
