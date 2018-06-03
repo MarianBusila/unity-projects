@@ -5,6 +5,7 @@ using GoogleARCore;
 
 
 public class SceneController : MonoBehaviour {
+    public GameObject trackedPlanePrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class SceneController : MonoBehaviour {
             return;
         }
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        ProcessNewPlanes();
 	}
 
     void QuitOnConnectionErrors()
@@ -32,6 +34,20 @@ public class SceneController : MonoBehaviour {
         else if(Session.Status.IsError())
         {
             StartCoroutine(CodelabUtils.ToastAndExit("ARCore encountered a problem connecting. Please restart the app.", 5));
+        }
+    }
+
+    void ProcessNewPlanes()
+    {
+        List<DetectedPlane> planes = new List<DetectedPlane>();
+        Session.GetTrackables(planes, TrackableQueryFilter.New);
+
+        for(int i = 0; i < planes.Count; i++)
+        {
+            // instantiate a plane visualization prefab and set it to track new plane
+            // the transform is set to the origin with an identity rotation since the mesh for our prefab is updated in Unity world coordinates
+            GameObject planeObject = Instantiate(trackedPlanePrefab, Vector3.zero, Quaternion.identity, transform);
+            planeObject.GetComponent<TrackedPlaneController>().SetTrackedPlane(planes[i]);
         }
     }
 }
