@@ -7,6 +7,7 @@ using GoogleARCore;
 public class SceneController : MonoBehaviour {
     public GameObject trackedPlanePrefab;
     public Camera firstPersonCamera;
+    public ScoreboardController scoreboard;
 
 	// Use this for initialization
 	void Start () {
@@ -73,5 +74,6 @@ public class SceneController : MonoBehaviour {
     void SetSelectedPlane(DetectedPlane selectedPlane)
     {
         Debug.Log("Selected plane centered at " + selectedPlane.CenterPose.position);
+        scoreboard.SetSelectedPlane(selectedPlane);
     }
 }
