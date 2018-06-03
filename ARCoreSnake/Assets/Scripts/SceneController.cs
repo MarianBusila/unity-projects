@@ -6,6 +6,7 @@ using GoogleARCore;
 
 public class SceneController : MonoBehaviour {
     public GameObject trackedPlanePrefab;
+    public Camera firstPersonCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,7 @@ public class SceneController : MonoBehaviour {
         }
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         ProcessNewPlanes();
+        ProcessTouches();
 	}
 
     void QuitOnConnectionErrors()
@@ -49,5 +51,27 @@ public class SceneController : MonoBehaviour {
             GameObject planeObject = Instantiate(trackedPlanePrefab, Vector3.zero, Quaternion.identity, transform);
             planeObject.GetComponent<TrackedPlaneController>().SetTrackedPlane(planes[i]);
         }
+    }
+
+    void ProcessTouches()
+    {
+        Touch touch;
+        if (Input.touchCount != 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+        {
+            return;
+        }
+
+        TrackableHit hit;
+        TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinBounds | TrackableHitFlags.PlaneWithinPolygon;
+
+        if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
+        {
+            SetSelectedPlane(hit.Trackable as DetectedPlane);
+        }
+    }
+
+    void SetSelectedPlane(DetectedPlane selectedPlane)
+    {
+        Debug.Log("Selected plane centered at " + selectedPlane.CenterPose.position);
     }
 }

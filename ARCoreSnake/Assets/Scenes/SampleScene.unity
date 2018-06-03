@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedPlanePrefab: {fileID: 1709815378626650, guid: ca52a8cadd8e063468accc447df6d05f,
     type: 2}
+  firstPersonCamera: {fileID: 692112697}
 --- !u!4 &474018408
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +274,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &692112697 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20155940112608238, guid: c10877f7cd5764de18d46d7b777d1faa,
+    type: 2}
+  m_PrefabInternal: {fileID: 1136898784}
 --- !u!1001 &1136898784
 Prefab:
   m_ObjectHideFlags: 0
