@@ -187,6 +187,7 @@ MonoBehaviour:
     type: 2}
   firstPersonCamera: {fileID: 692112697}
   scoreboard: {fileID: 1208375175}
+  snakeController: {fileID: 1775758340}
 --- !u!4 &474018408
 Transform:
   m_ObjectHideFlags: 0
@@ -358,7 +359,7 @@ Transform:
   m_GameObject: {fileID: 1208375174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1781917269}
   m_Father: {fileID: 0}
@@ -406,6 +407,64 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca52a8cadd8e063468accc447df6d05f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1775758339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1775758342}
+  - component: {fileID: 1775758341}
+  - component: {fileID: 1775758340}
+  m_Layer: 0
+  m_Name: Snake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1775758340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775758339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee3df69f5268d844b3526b9378f8192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeHeadPrefab: {fileID: 1513151796975466, guid: 20bced297c6d040a8aa55859197c9ff2,
+    type: 2}
+--- !u!114 &1775758341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775758339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a416ca76c65a8479ea67f290b38da363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 1472386904163680, guid: 6af456afd8c164df8977a0cb26219113, type: 2}
+  speed: 15
+  rotationSpeed: 50
+  minDistance: 0.05
+--- !u!4 &1775758342
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775758339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1781917268
 Prefab:
   m_ObjectHideFlags: 0

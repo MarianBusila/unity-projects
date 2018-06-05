@@ -8,6 +8,7 @@ public class SceneController : MonoBehaviour {
     public GameObject trackedPlanePrefab;
     public Camera firstPersonCamera;
     public ScoreboardController scoreboard;
+    public SnakeController snakeController;
 
 	// Use this for initialization
 	void Start () {
@@ -75,5 +76,6 @@ public class SceneController : MonoBehaviour {
     {
         Debug.Log("Selected plane centered at " + selectedPlane.CenterPose.position);
         scoreboard.SetSelectedPlane(selectedPlane);
+        snakeController.SetPlane(selectedPlane);
     }
 }
