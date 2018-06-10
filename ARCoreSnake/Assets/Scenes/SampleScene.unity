@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 474018408}
   - component: {fileID: 474018407}
   - component: {fileID: 474018409}
+  - component: {fileID: 474018410}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -261,6 +262,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handleScaleInput: 1
   adjustScale: 0
+--- !u!114 &474018410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 474018406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf908453865b2524193cf7853120992c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodInstance: {fileID: 0}
+  foodModels:
+  - {fileID: 1913620319998376, guid: 1084833c96f064d348b5f2d6b92e4d2b, type: 2}
+  - {fileID: 1857551045338566, guid: 6ed7a7f7a75ef400a883c50389e70412, type: 2}
+  - {fileID: 1141594904977818, guid: 26f6bd880ce034294949696670b9a2ca, type: 2}
 --- !u!1 &480673303
 GameObject:
   m_ObjectHideFlags: 0
