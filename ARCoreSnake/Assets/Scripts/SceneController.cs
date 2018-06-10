@@ -27,6 +27,7 @@ public class SceneController : MonoBehaviour {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         ProcessNewPlanes();
         ProcessTouches();
+        scoreboard.SetScore(snakeController.GetLength());
 	}
 
     void QuitOnConnectionErrors()

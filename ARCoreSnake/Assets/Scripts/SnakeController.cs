@@ -62,6 +62,11 @@ public class SnakeController : MonoBehaviour {
         SpawnSnake();
     }
 
+    public int GetLength()
+    {
+        return GetComponent<Slithering>().GetLength();
+    }
+
     private void SpawnSnake()
     {
         if (snakeInstance != null)

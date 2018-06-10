@@ -53,6 +53,15 @@ public class ScoreboardController : MonoBehaviour {
         CreateAnchor();
     }
 
+    public void SetScore(int score)
+    {
+        if(this.score != score)
+        {
+            GetComponentInChildren<TextMesh>().text = "Score: " + score;
+            this.score = score;
+        }
+    }
+
     private void CreateAnchor()
     {
         // create the position of the anchor by raycasting a point towards the top of the screen
