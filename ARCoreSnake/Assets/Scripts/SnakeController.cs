@@ -77,5 +77,7 @@ public class SnakeController : MonoBehaviour {
 
         // pass the head to the slithering
         GetComponent<Slithering>().Head = snakeInstance.transform;
+
+        snakeInstance.AddComponent<FoodConsumer>();
     }
 }
