@@ -18,6 +18,7 @@ public class PlayerMotor : MonoBehaviour {
         if(target != null)
         {
             agent.SetDestination(target.position);
+            FaceTarget();
         }
     }
 
@@ -29,12 +30,21 @@ public class PlayerMotor : MonoBehaviour {
     public void FollowTarget(Interactable newTarget)
     {
         agent.stoppingDistance = newTarget.radius * .8f; // stop when entering the radius of our interactable
+        agent.updateRotation = false;
         target = newTarget.transform;        
     }
 
     public void StopFollowingTarget()
     {
         agent.stoppingDistance = 0;
+        agent.updateRotation = true;
         target = null;
+    }
+
+    void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }
