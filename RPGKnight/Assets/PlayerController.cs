@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
     Camera cam;
     public LayerMask movementMask;
+    PlayerMotor motor;
 
 	// Use this for initialization
 	void Start () {
-        cam = Camera.main;	
+        cam = Camera.main;
+        motor = GetComponent<PlayerMotor>();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour {
             {
                 // move player to what we hit
                 Debug.Log("We hit " + hit.collider.name + " " + hit.point);
+                motor.MoveToPoint(hit.point);
 
                 // stop focusing any objects
             }
