@@ -10,15 +10,20 @@ public class CameraController : MonoBehaviour {
     public float minZoom = 5f;
     public float maxZoom = 15f;
 
+    public float yawSpeed = 100f;
+
     public float pitch = 2f;
 
     private float currentZoom = 10;
+    private float currentYaw;
 
     private void Update()
     {
         {
             currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
             currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+
+            currentYaw -= Input.GetAxis("Horizontal") * yawSpeed * Time.deltaTime;
         }
     }
 
@@ -28,5 +33,8 @@ public class CameraController : MonoBehaviour {
 
         // look at target
         transform.LookAt(target.position + Vector3.up * pitch);
+
+        // rotate camera
+        transform.RotateAround(target.position, Vector3.up, currentYaw);
 	}
 }
