@@ -32,5 +32,20 @@ public class PlayerController : MonoBehaviour {
                 // stop focusing any objects
             }
         }
-	}
+
+        // right mouse button
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            float maxDistance = 100;
+            if (Physics.Raycast(ray, out hit, maxDistance))
+            {
+                // check if we hit an interactable
+                // if we did set it as our focus
+                Debug.Log("We hit interactable " + hit.collider.name + " " + hit.point);
+            }
+        }
+    }
 }
