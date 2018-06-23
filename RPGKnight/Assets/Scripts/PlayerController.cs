@@ -60,11 +60,13 @@ public class PlayerController : MonoBehaviour {
     void SetFocus(Interactable newFocus)
     {
         focus = newFocus;
+        newFocus.OnFocused(transform);
         motor.FollowTarget(newFocus);
     }
 
     void RemoveFocus()
     {
+        focus.OnDefocused();
         focus = null;
         motor.StopFollowingTarget();
     }
