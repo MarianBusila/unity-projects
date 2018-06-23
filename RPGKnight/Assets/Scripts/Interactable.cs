@@ -7,14 +7,22 @@ public class Interactable : MonoBehaviour {
     bool isFocus = false;
     Transform player;
 
+    bool hasInteracted = false;
+
+    public virtual void Interact()
+    {
+        Debug.Log("Interacting with " + transform);
+    }
+
     private void Update()
     {
-        if(isFocus)
+        if(isFocus && !hasInteracted)
         {
             float distance = Vector3.Distance(player.position, transform.position);
             if(distance <= radius)
             {
-                Debug.Log("Interact");
+                Interact();
+                hasInteracted = true;
             }
         }
     }
@@ -22,12 +30,14 @@ public class Interactable : MonoBehaviour {
     {
         isFocus = true;
         player = playerTransform;
+        hasInteracted = false;
     }
 
     public void OnDefocused()
     {
         isFocus = false;
         player = null;
+        hasInteracted = false;
     }
 
     private void OnDrawGizmosSelected()
