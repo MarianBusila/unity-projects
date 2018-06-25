@@ -3,6 +3,7 @@
 public class Interactable : MonoBehaviour {
 
     public float radius = 3f; // the distance wwhen we should start interact with our object
+    public Transform interactionTransform; // transform to be able to interact with an object only from a give direction (ex. front of the chest)
 
     bool isFocus = false;
     Transform player;
@@ -18,7 +19,7 @@ public class Interactable : MonoBehaviour {
     {
         if(isFocus && !hasInteracted)
         {
-            float distance = Vector3.Distance(player.position, transform.position);
+            float distance = Vector3.Distance(player.position, interactionTransform.position);
             if(distance <= radius)
             {
                 Interact();
@@ -43,6 +44,6 @@ public class Interactable : MonoBehaviour {
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }
 }
