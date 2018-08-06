@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
         // left mouse button
 		if(Input.GetMouseButtonDown(0))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            var ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             float maxDistance = 100;
@@ -39,14 +39,14 @@ public class PlayerController : MonoBehaviour {
         // right mouse button
         if (Input.GetMouseButtonDown(1))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            var ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             float maxDistance = 100;
             if (Physics.Raycast(ray, out hit, maxDistance))
             {
                 // check if we hit an interactable
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                var interactable = hit.collider.GetComponent<Interactable>();
                 // if we did set it as our focus
                 if (interactable != null)
                 {
