@@ -18,12 +18,14 @@
 
 * DaydreamGrabReleaseSphere	- a VR tutorial of handling a sphere object for DayDream
 * DaydreamPickingPushing - Picking, Pushing and Throwing with Daydream Controller [Google CodeLabs Tutorial](https://codelabs.developers.google.com/codelabs/daydream-picking-pushing/index.html?index=..%2F..%2Findex#0)
-    * Create a new Unity project that uses the Google VR Unity SDK.
-    * How to import the Google VR Unity SDK package.
+    * Create a new Unity project that uses the Google VR Unity SDK.    
     * How to adjust the build settings to target Daydream devices.
     * Deploy a Daydream app onto a device.
     * Create a highlighting component that will notify the user when objects can be interacted with.
     * Create pushable buttons that will control and fire a cannon.
+    
+![DaydreamPickingPushing](images/DaydreamPickingPushing.gif)
+
 * EndlessRunner
 * HorrorApartment
 * LyndaTown
