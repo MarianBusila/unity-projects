@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/S3/S3Example.unity
     guid: 6b0285e289508274b9fc0a77b6f8b8b2
+  - enabled: 1
+    path: Assets/DynamoDB/DynamoDBExample.unity
+    guid: a51f15e277c4168438967d34dbb1d4c5
+  - enabled: 1
+    path: Assets/DynamoDB/LowLevelDynamoDBExample.unity
+    guid: fadbaf1baf65eac42bb09174a854442d
+  - enabled: 1
+    path: Assets/DynamoDB/TableQueryAndScanExample.unity
+    guid: 9916fbc8cb11c694db70b3333d3de1f8
+  - enabled: 1
+    path: Assets/DynamoDB/HighLevelExample.unity
+    guid: 6f282018a87c13b41a088511b9f2c715
   m_configObjects: {}
