@@ -27,6 +27,9 @@
 ![DaydreamPickingPushing](images/DaydreamPickingPushing.gif)
 
 * EndlessRunner
+
+![EndlessRunner](images/EndlessRunner.gif)
+
 * HorrorApartment
 * LyndaTown
 * MLAgentsRollerBall
