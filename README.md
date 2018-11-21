@@ -10,7 +10,7 @@
 * AWSSamples - a proof of concept how to access AWS S3 and DynamoDB and how to use AWS Cognito
 * AudioSpectrumVisualization - visualizer for audio spectrum data
 
-![AudioSpectrumVisualization](https://bitbucket.org/marian_busila/unity-projects/src/master/images/AudioSpectrumVisualization.gif)
+![AudioSpectrumVisualization](images/AudioSpectrumVisualization.gif)
 
 * CharacterAnimator
 * DaydreamGrabReleaseSphere	- a VR tutorial of handling a sphere object for DayDream
