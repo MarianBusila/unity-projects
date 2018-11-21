@@ -1,4 +1,4 @@
-## Small games and experiences developed Unity3D.
+## Small games and experiences developed in Unity3D.
 * ARCorePortal - an Augmented Reality Portal based on the series [How To Unity AR Portal](https://www.youtube.com/playlist?list=PLKIKuXdn4ZMhwJmPnYI0e7Ixv94ZFPvEP) using Stencil buffer
 * ARCoreSnake - an Augmented Reality Snake game based on [Google CodeLabs Tutorial](https://codelabs.developers.google.com/codelabs/arcore-intro/index.html?index=..%2F..io2018#0)
     * Enabling ARCore through the Player settings
@@ -31,6 +31,9 @@
 ![EndlessRunner](images/EndlessRunner.gif)
 
 * HorrorApartment
+
+![HorrorApartment](images/HorrorApartment.gif)
+
 * LyndaTown
 * MLAgentsRollerBall
 * Minecraft

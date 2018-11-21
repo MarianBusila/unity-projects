@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy_Chase : MonoBehaviour {
 
-    private NavMeshAgent myAgent;
+    private UnityEngine.AI.NavMeshAgent myAgent;
     private Animator myAnimator;
     public Transform transformTarget;
 
@@ -18,7 +18,7 @@ public class Enemy_Chase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        myAgent = GetComponent<NavMeshAgent>();
+        myAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         myAnimator = GetComponent<Animator>();
         myAgent.stoppingDistance = stoppingDistance;
         attackCooldown = Time.time;
