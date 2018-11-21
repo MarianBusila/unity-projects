@@ -11,6 +11,7 @@
 * AudioSpectrumVisualization - visualizer for audio spectrum data
 
 ![AudioSpectrumVisualization](https://bitbucket.org/marian_busila/unity-projects/src/master/images/AudioSpectrumVisualization.gif)
+
 * CharacterAnimator
 * DaydreamGrabReleaseSphere	- a VR tutorial of handling a sphere object for DayDream
 * DaydreamPickingPushing - Picking, Pushing and Throwing with Daydream Controller [Google CodeLabs Tutorial](https://codelabs.developers.google.com/codelabs/daydream-picking-pushing/index.html?index=..%2F..%2Findex#0)
