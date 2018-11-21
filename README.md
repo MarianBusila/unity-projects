@@ -12,7 +12,10 @@
 
 ![AudioSpectrumVisualization](images/AudioSpectrumVisualization.gif)
 
-* CharacterAnimator
+* CharacterAnimator - create a character in Blender(Model, UV Mapping, Texture, Rigging, Animation) and use Animator controller in Unity3D
+
+![CharacterAnimator](images/CharacterAnimator.gif)
+
 * DaydreamGrabReleaseSphere	- a VR tutorial of handling a sphere object for DayDream
 * DaydreamPickingPushing - Picking, Pushing and Throwing with Daydream Controller [Google CodeLabs Tutorial](https://codelabs.developers.google.com/codelabs/daydream-picking-pushing/index.html?index=..%2F..%2Findex#0)
     * Create a new Unity project that uses the Google VR Unity SDK.
