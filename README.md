@@ -45,6 +45,10 @@
 
 ![MLAgentsRollerBall](images/MLAgentsRollerBall.gif)
 
+* MLAgents - using Reinforcement Learning with [MLAgents] Toolkit(https://github.com/Unity-Technologies/ml-agents) to train an agent(BlueCube) to push a target (OrangeCube) to a Goal area
+
+![MLAgentsPushBlock](images/MLAgentsPushBlock.gif)
+
 * Minecraft
 * MultiplayerBasic
 * Pinball
