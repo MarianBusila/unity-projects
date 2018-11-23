@@ -34,7 +34,16 @@
 
 ![HorrorApartment](images/HorrorApartment.gif)
 
-* LyndaTown
+* LyndaTown - Creating a Game Environment in Blender and Unity based on [Lynda Tutorial](https://www.lynda.com/Blender-tutorials/Creating-Game-Environment-Blender/380259-2.html)
+    * Testing the scale
+    * Modeling buildings and pipes
+    * Creating walkways
+    * UV mapping
+    * Creating textures
+    * Importing the scene in Unity
+ 
+ ![LyndaTown](images/LyndaTown.gif)
+ 
 * MLAgentsRollerBall
 * Minecraft
 * MultiplayerBasic
