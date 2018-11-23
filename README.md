@@ -41,10 +41,10 @@
     * UV mapping
     * Creating textures
     * Importing the scene in Unity
- 
- ![LyndaTown](images/LyndaTown.gif)
- 
-* MLAgentsRollerBall
+* MLAgentsRollerBall - using Reinforcement Learning with [MLAgents] Toolkit(https://github.com/Unity-Technologies/ml-agents) to train an agent(Ball) to touch a target (Cube) without falling from the platform
+
+![MLAgentsRollerBall](images/MLAgentsRollerBall.gif)
+
 * Minecraft
 * MultiplayerBasic
 * Pinball
