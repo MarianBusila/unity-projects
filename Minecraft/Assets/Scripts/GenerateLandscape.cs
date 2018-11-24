@@ -43,7 +43,7 @@ public class GenerateLandscape : MonoBehaviour {
     // Use this for initialization
     void Start() {
         worldBlocks = new Block[width, height, depth];
-        int seed = (int)Network.time * 10;
+        int seed = (int)Random.Range(1, 20) * 10;
         for (int z = 0; z < depth; z++)
             for (int x = 0; x < width; x++)
             {

@@ -49,7 +49,10 @@
 
 ![MLAgentsPushBlock](images/MLAgentsPushBlock.gif)
 
-* Minecraft
+* Minecraft - a procedurally generated Minecraft game
+
+![Minecraft](images/Minecraft.gif)
+
 * MultiplayerBasic
 * Pinball
 * ProceduralCity
