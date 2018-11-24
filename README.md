@@ -53,7 +53,10 @@
 
 ![Minecraft](images/Minecraft.gif)
 
-* MultiplayerBasic
+* MultiplayerBasic - a proof of concept for a multiplayer game using UnityEngine.Networking
+
+![MultiplayerBasic](images/MultiplayerBasic.gif)
+
 * Pinball
 * ProceduralCity
 * RPGKnight
