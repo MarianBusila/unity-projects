@@ -64,6 +64,9 @@
 * Service Adjustmend App
 * ShaderGraphDissolve
 * SideScrollingSpaceShip
+
+![SideScrollingSpaceShip](images/SideScrollingSpaceShip.gif)
+
 * SimpleRPG
 * Space Shooter
 * SurvivalShooter
