@@ -71,7 +71,9 @@
 * Space Shooter
 * SurvivalShooter
 * TalkingCube
-* Tanks
+* Tanks - a 2 player (one keyboard) shooter game with simple game mechanics, integrating world and screen space UI, as well as game architecture and audio mixing.
+Based on [Tanks](https://unity3d.com/learn/tutorials/s/tanks-tutorial) tutorial from Unity3D
+
 
 ![Tanks](images/Tanks.gif)
 
