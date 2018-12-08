@@ -69,7 +69,12 @@
 
 * SimpleRPG
 * Space Shooter
-* SurvivalShooter
+* SurvivalShooter - an isometric 3D survival shooter game.
+Based on the [Survival Shooter](https://unity3d.com/learn/tutorials/s/survival-shooter-tutorial) from Unity
+
+![SurvivalShooter](images/SurvivalShooter.gif)
+
+
 * TalkingCube
 * Tanks - a 2 player (one keyboard) shooter game with simple game mechanics, integrating world and screen space UI, as well as game architecture and audio mixing.
 Based on [Tanks](https://unity3d.com/learn/tutorials/s/tanks-tutorial) tutorial from Unity3D
