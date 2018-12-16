@@ -663,7 +663,7 @@ MonoBehaviour:
     - 
     - 
     vectorActionSpaceType: 1
-  brainType: 2
+  brainType: 3
   CoreBrains:
   - {fileID: 422172460}
   - {fileID: 1699945847}
@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Name: (Clone)(Clone)
   m_EditorClassIdentifier: 
   broadcast: 1
-  graphModel: {fileID: 0}
+  graphModel: {fileID: 4900000, guid: da9c60f3c65746d42a1c4724567b5942, type: 3}
   graphScope: 
   graphPlaceholders: []
   BatchSizePlaceholderName: batch_size
