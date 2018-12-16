@@ -1,5 +1,12 @@
 ## Small games and experiences developed in Unity3D.
+
+* MLAgents Reacher Arm - using Reinforcement Learning with [MLAgents](https://github.com/Unity-Technologies/ml-agents) Toolkit to train a double jointed arm to move it's hand to goal location and keep it there.
+The agent collects observations related to position, rotation, velocity and angular velocity of the upper and lower arm. He is rewarded each time when the hand is in goal location.
+
+![MLAgentsReacherArm](images/MLAgentsReacherArm.gif)
+
 * ARCorePortal - an Augmented Reality Portal based on the series [How To Unity AR Portal](https://www.youtube.com/playlist?list=PLKIKuXdn4ZMhwJmPnYI0e7Ixv94ZFPvEP) using Stencil buffer
+
 * ARCoreSnake - an Augmented Reality Snake game based on [Google CodeLabs Tutorial](https://codelabs.developers.google.com/codelabs/arcore-intro/index.html?index=..%2F..io2018#0)
     * Enabling ARCore through the Player settings
     * Adding the ARCore SDK prefabs to the scene
@@ -7,7 +14,9 @@
     * Using Anchors to place objects at a fixed location relative to the real world.
     * Using detected planes as the foundation of augmented reality objects
     * Using touch and gaze input to interact with the ARCore scene
+	
 * AWSSamples - a proof of concept how to access AWS S3 and DynamoDB and how to use AWS Cognito
+
 * AudioSpectrumVisualization - visualizer for audio spectrum data
 
 ![AudioSpectrumVisualization](images/AudioSpectrumVisualization.gif)
@@ -41,11 +50,11 @@
     * UV mapping
     * Creating textures
     * Importing the scene in Unity
-* MLAgentsRollerBall - using Reinforcement Learning with [MLAgents] Toolkit(https://github.com/Unity-Technologies/ml-agents) to train an agent(Ball) to touch a target (Cube) without falling from the platform
+* MLAgentsRollerBall - using Reinforcement Learning with [MLAgents](https://github.com/Unity-Technologies/ml-agents) Toolkit to train an agent(Ball) to touch a target (Cube) without falling from the platform
 
 ![MLAgentsRollerBall](images/MLAgentsRollerBall.gif)
 
-* MLAgents - using Reinforcement Learning with [MLAgents] Toolkit(https://github.com/Unity-Technologies/ml-agents) to train an agent(BlueCube) to push a target (OrangeCube) to a Goal area
+* MLAgents - using Reinforcement Learning with [MLAgents](https://github.com/Unity-Technologies/ml-agents) Toolkit to train an agent(BlueCube) to push a target (OrangeCube) to a Goal area
 
 ![MLAgentsPushBlock](images/MLAgentsPushBlock.gif)
 
