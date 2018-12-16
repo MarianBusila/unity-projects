@@ -830,6 +830,10 @@ MonoBehaviour:
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 4
+  upperArm: {fileID: 1683610726}
+  lowerArm: {fileID: 30787314}
+  hand: {fileID: 1152498062}
+  goal: {fileID: 1577284544}
 --- !u!4 &941421773
 Transform:
   m_ObjectHideFlags: 0
