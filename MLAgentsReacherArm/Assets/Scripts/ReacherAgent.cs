@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using MLAgents;
-using System;
 
 public class ReacherAgent : Agent {
     public GameObject upperArm;
@@ -69,8 +66,24 @@ public class ReacherAgent : Agent {
         goal.transform.position = new Vector3(goalY, -1f, goalX) + transform.position;
     }
 
+    // resets the position and velocity of the agent and the goal
     public override void AgentReset()
     {
-        
+        upperArm.transform.position = new Vector3(0f, -4f, 0f) + transform.position;
+        upperArm.transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+        upperArmRB.angularVelocity = Vector3.zero;
+        upperArmRB.velocity = Vector3.zero;
+
+        lowerArm.transform.position = new Vector3(0f, -10f, 0f) + transform.position;
+        lowerArm.transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+        lowerArmRB.angularVelocity = Vector3.zero;
+        lowerArmRB.velocity = Vector3.zero;
+
+        goalDegree = Random.Range(0f, 360f);
+        UpdateGoalPosition();
+
+        goalSize = reacherAcademy.goalSize;
+        goalSpeed = Random.Range(-1f, 1f) * reacherAcademy.goalSpeed;
+        goal.transform.localScale = new Vector3(goalSize, goalSize, goalSize);
     }
 }
