@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 402722155}
   - component: {fileID: 402722154}
   - component: {fileID: 402722153}
+  - component: {fileID: 402722158}
   m_Layer: 0
   m_Name: Foreleg1
   m_TagString: Untagged
@@ -826,6 +827,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 402722151}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &402722158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 402722151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 0
+  penalizeGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 1
 --- !u!1 &406317347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,6 +1841,7 @@ GameObject:
   - component: {fileID: 1325781727}
   - component: {fileID: 1325781726}
   - component: {fileID: 1325781725}
+  - component: {fileID: 1325781730}
   m_Layer: 0
   m_Name: Foreleg0
   m_TagString: Untagged
@@ -2009,6 +2027,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1325781723}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1325781730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1325781723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 0
+  penalizeGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 1
 --- !u!1 &1421369085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2056,7 @@ GameObject:
   - component: {fileID: 1421369089}
   - component: {fileID: 1421369088}
   - component: {fileID: 1421369087}
+  - component: {fileID: 1421369092}
   m_Layer: 0
   m_Name: Foreleg3
   m_TagString: Untagged
@@ -2207,6 +2242,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1421369085}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1421369092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1421369085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 0
+  penalizeGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 1
 --- !u!1 &1428663561
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,6 +2271,7 @@ GameObject:
   - component: {fileID: 1428663565}
   - component: {fileID: 1428663564}
   - component: {fileID: 1428663563}
+  - component: {fileID: 1428663568}
   m_Layer: 0
   m_Name: Foreleg2
   m_TagString: Untagged
@@ -2405,6 +2457,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1428663561}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1428663568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1428663561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 0
+  penalizeGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 1
 --- !u!1 &1474179476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 120
+    vectorObservationSize: 129
     numStackedVectorObservations: 1
     vectorActionSize: 14000000
     cameraResolutions: []

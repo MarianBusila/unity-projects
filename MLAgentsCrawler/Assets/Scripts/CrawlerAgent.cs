@@ -47,7 +47,8 @@ public class CrawlerAgent : Agent {
     /// </summary>
     public void CollectObservationBodyPart(BodyPart bp)
     {
-        var rb = bp.rb;        
+        var rb = bp.rb;
+        AddVectorObs(bp.groundContact.touchingGround ? 1 : 0); // Whether the bp touching the ground
         AddVectorObs(rb.velocity);
         AddVectorObs(rb.angularVelocity);
 

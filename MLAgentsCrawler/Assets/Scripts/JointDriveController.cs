@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
+using MLAgents;
 
 [System.Serializable]
 public class BodyPart
@@ -11,6 +10,10 @@ public class BodyPart
     public Rigidbody rb;
     public Vector3 startingPos;
     public Quaternion startingRot;
+
+    [Header("Ground Contact")]
+    [Space(10)]
+    public GroundContact groundContact;
 
     [HideInInspector] public JointDriveController thisJDController;
 
@@ -42,6 +45,11 @@ public class BodyPart
         bp.rb.transform.rotation = bp.startingRot;
         bp.rb.velocity = Vector3.zero;
         bp.rb.angularVelocity = Vector3.zero;
+
+        if(bp.groundContact)
+        {
+            bp.groundContact.touchingGround = false;
+        }
     }
 
     // <summary>
@@ -111,6 +119,14 @@ public class JointDriveController : MonoBehaviour
         bp.thisJDController = this;
         bodyPartsDict.Add(t, bp);
         bodyPartsList.Add(bp);
+
+        // add and setup the gound contact script
+        bp.groundContact = t.GetComponent<GroundContact>();
+        if(bp.groundContact == null)
+        {
+            bp.groundContact = t.gameObject.AddComponent<GroundContact>();            
+        }
+        bp.groundContact.agent = gameObject.GetComponent<Agent>();
     }
 
     public void GetCurrentJointForces()
