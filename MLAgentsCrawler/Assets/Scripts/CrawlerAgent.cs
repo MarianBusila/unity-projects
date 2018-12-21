@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using MLAgents;
 
+[RequireComponent(typeof(JointDriveController))]
 public class CrawlerAgent : Agent {
     [Header("Target to walk towards")]
     [Space(10)]
@@ -19,9 +20,26 @@ public class CrawlerAgent : Agent {
     public Transform leg3Upper;
     public Transform leg3Lower;
 
+    [Header("Joint settings")]
+    [Space(10)]
+    JointDriveController jdController;
+    Vector3 dirToTarget;
+
+
     public override void InitializeAgent()
     {
-        
+        jdController = GetComponent<JointDriveController>();
+
+        //Setup each body part
+        jdController.SetupBodyPart(body);
+        jdController.SetupBodyPart(leg0Upper);
+        jdController.SetupBodyPart(leg0Lower);
+        jdController.SetupBodyPart(leg1Upper);
+        jdController.SetupBodyPart(leg1Lower);
+        jdController.SetupBodyPart(leg2Upper);
+        jdController.SetupBodyPart(leg2Lower);
+        jdController.SetupBodyPart(leg3Upper);
+        jdController.SetupBodyPart(leg3Lower);
     }
 
     public override void CollectObservations()
@@ -36,6 +54,14 @@ public class CrawlerAgent : Agent {
 
     public override void AgentReset()
     {
-        
+        if(dirToTarget != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dirToTarget);
+        }
+
+        foreach(var bodyPart in jdController.bodyPartsDict.Values)
+        {
+            bodyPart.Reset(bodyPart);
+        }
     }
 }

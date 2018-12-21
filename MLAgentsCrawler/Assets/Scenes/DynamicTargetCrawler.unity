@@ -252,6 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207238984}
   - component: {fileID: 207238985}
+  - component: {fileID: 207238986}
   m_Layer: 0
   m_Name: Crawler
   m_TagString: Untagged
@@ -310,6 +311,17 @@ MonoBehaviour:
   leg2Lower: {fileID: 1428663562}
   leg3Upper: {fileID: 237907290}
   leg3Lower: {fileID: 1421369086}
+--- !u!114 &207238986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 207238983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2d172bd186b964bbf692ccd1abdf54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &237907284
 GameObject:
   m_ObjectHideFlags: 0
