@@ -11,9 +11,10 @@ public class BodyPart
     public Vector3 startingPos;
     public Quaternion startingRot;
 
-    [Header("Ground Contact")]
+    [Header("Ground and Target Contact")]
     [Space(10)]
     public GroundContact groundContact;
+    public TargetContact targetContact;
 
     [HideInInspector] public JointDriveController thisJDController;
 
@@ -49,6 +50,11 @@ public class BodyPart
         if(bp.groundContact)
         {
             bp.groundContact.touchingGround = false;
+        }
+
+        if(bp.targetContact)
+        {
+            bp.targetContact.touchingTarget = false;
         }
     }
 
@@ -127,6 +133,13 @@ public class JointDriveController : MonoBehaviour
             bp.groundContact = t.gameObject.AddComponent<GroundContact>();            
         }
         bp.groundContact.agent = gameObject.GetComponent<Agent>();
+
+        // add an setup target contact script
+        bp.targetContact = t.GetComponent<TargetContact>();
+        if(bp.targetContact == null)
+        {
+            bp.targetContact = t.gameObject.AddComponent<TargetContact>();
+        }
     }
 
     public void GetCurrentJointForces()

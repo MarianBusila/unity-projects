@@ -302,6 +302,9 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 5
   target: {fileID: 1136392363}
   ground: {fileID: 1474179477}
+  detectTargets: 1
+  respawnTargetWhenTouched: 1
+  targetSpawnRadius: 50
   body: {fileID: 334507923}
   leg0Upper: {fileID: 1765128577}
   leg0Lower: {fileID: 1325781724}
@@ -322,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2d172bd186b964bbf692ccd1abdf54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJointSpring: 40000
+  maxJointSpring: 400000
   jointDampen: 3000
   maxJointForceLimit: 10000
   bodyPartsList: []
@@ -1448,7 +1451,7 @@ GameObject:
   - component: {fileID: 1136392364}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,10 @@ public class CrawlerAgent : Agent {
     public Transform target;
     public Transform ground;
 
+    public bool detectTargets;
+    public bool respawnTargetWhenTouched;
+    public float targetSpawnRadius;
+
     [Header("Body parts")]
     [Space(10)]
     public Transform body;
@@ -81,6 +85,17 @@ public class CrawlerAgent : Agent {
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
+        if (detectTargets)
+        {
+            foreach (var bodyPart in jdController.bodyPartsDict.Values)
+            {
+                if (bodyPart.targetContact && !IsDone() && bodyPart.targetContact.touchingTarget)
+                {
+                    TouchedTarget();
+                }
+            }
+        }
+
         // The dictionary with all the body parts in it are in the jdController
         var bpDict = jdController.bodyPartsDict;
 
@@ -117,5 +132,27 @@ public class CrawlerAgent : Agent {
         {
             bodyPart.Reset(bodyPart);
         }
+    }
+
+    /// <summary>
+    /// Agent touched the target
+    /// </summary>
+    public void TouchedTarget()
+    {
+        AddReward(1f);
+        if (respawnTargetWhenTouched)
+        {
+            GetRandomTargetPos();
+        }
+    }
+
+    /// <summary>
+    /// Moves target to a random position within specified radius.
+    /// </summary>
+    public void GetRandomTargetPos()
+    {
+        Vector3 newTargetPos = Random.insideUnitSphere * targetSpawnRadius;
+        newTargetPos.y = 5;
+        target.position = newTargetPos + ground.position;
     }
 }
