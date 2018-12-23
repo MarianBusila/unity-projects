@@ -28,6 +28,14 @@ public class CrawlerAgent : Agent {
     [Space(10)]
     JointDriveController jdController;
     Vector3 dirToTarget;
+    float movingTowardsDot;
+    float facingDot;
+
+    [Header("Reward Functions To Use")]
+    [Space(10)]
+    public bool rewardMovingTowardsTarget; // Agent should move towards target
+    public bool rewardFacingTarget; // Agent should face the target
+    public bool rewardUseTimePenalty; // Hurry up
 
 
     public override void InitializeAgent()
@@ -96,6 +104,9 @@ public class CrawlerAgent : Agent {
             }
         }
 
+        // Update pos to target
+        dirToTarget = target.position - jdController.bodyPartsDict[body].rb.position;
+
         // The dictionary with all the body parts in it are in the jdController
         var bpDict = jdController.bodyPartsDict;
 
@@ -119,6 +130,22 @@ public class CrawlerAgent : Agent {
         bpDict[leg1Lower].SetJointStrength(vectorAction[++i]);
         bpDict[leg2Lower].SetJointStrength(vectorAction[++i]);
         bpDict[leg3Lower].SetJointStrength(vectorAction[++i]);
+
+        // Set reward for this step according to mixture of the following elements.
+        if (rewardMovingTowardsTarget)
+        {
+            RewardFunctionMovingTowards();
+        }
+
+        if (rewardFacingTarget)
+        {
+            RewardFunctionFacingTarget();
+        }
+
+        if (rewardUseTimePenalty)
+        {
+            RewardFunctionTimePenalty();
+        }
     }
 
     public override void AgentReset()
@@ -155,4 +182,31 @@ public class CrawlerAgent : Agent {
         newTargetPos.y = 5;
         target.position = newTargetPos + ground.position;
     }
+
+    /// <summary>
+    /// Reward moving towards target & Penalize moving away from target.
+    /// </summary>
+    void RewardFunctionMovingTowards()
+    {
+        movingTowardsDot = Vector3.Dot(jdController.bodyPartsDict[body].rb.velocity, dirToTarget.normalized);
+        AddReward(0.03f * movingTowardsDot);
+    }
+
+    /// <summary>
+    /// Reward facing target & Penalize facing away from target
+    /// </summary>
+    void RewardFunctionFacingTarget()
+    {
+        facingDot = Vector3.Dot(dirToTarget.normalized, body.forward);
+        AddReward(0.01f * facingDot);
+    }
+
+    /// <summary>
+    /// Existential penalty for time-contrained tasks.
+    /// </summary>
+    void RewardFunctionTimePenalty()
+    {
+        AddReward(-0.001f);
+    }
+
 }

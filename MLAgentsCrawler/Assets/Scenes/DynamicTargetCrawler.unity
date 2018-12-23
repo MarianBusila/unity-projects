@@ -314,6 +314,9 @@ MonoBehaviour:
   leg2Lower: {fileID: 1428663562}
   leg3Upper: {fileID: 237907290}
   leg3Lower: {fileID: 1421369086}
+  rewardMovingTowardsTarget: 1
+  rewardFacingTarget: 1
+  rewardUseTimePenalty: 0
 --- !u!114 &207238986
 MonoBehaviour:
   m_ObjectHideFlags: 0
