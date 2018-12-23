@@ -6,6 +6,10 @@ In the first training session the agent it is free to find a way to move towards
 
 ![MLAgentsCrawlerBackwards](images/MLAgentsCrawlerBackwards.gif)
 
+In the second training session, the agents gets a penalty if the upper leg (the white one) touches the ground.
+
+![MLAgentsCrawler](images/MLAgentsCrawler.gif)
+
 * MLAgents Reacher Arm - using Reinforcement Learning with [MLAgents](https://github.com/Unity-Technologies/ml-agents) Toolkit to train a double jointed arm to move it's hand to goal location and keep it there.
 The agent collects observations related to position, rotation, velocity and angular velocity of the upper and lower arm. He is rewarded each time when the hand is in goal location.
 

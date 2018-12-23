@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 136613175350894002}
   - component: {fileID: 54728820170773796}
   - component: {fileID: 153361254034457372}
+  - component: {fileID: 114807230467749122}
   m_Layer: 0
   m_Name: Leg3
   m_TagString: Untagged
@@ -163,6 +164,7 @@ GameObject:
   - component: {fileID: 136558304802506888}
   - component: {fileID: 54743104132586246}
   - component: {fileID: 153103391619020274}
+  - component: {fileID: 114519426989641784}
   m_Layer: 0
   m_Name: Leg0
   m_TagString: Untagged
@@ -215,6 +217,7 @@ GameObject:
   - component: {fileID: 136191798555221834}
   - component: {fileID: 54186730775993120}
   - component: {fileID: 153825645315355344}
+  - component: {fileID: 114412091036881826}
   m_Layer: 0
   m_Name: Leg2
   m_TagString: Untagged
@@ -293,6 +296,7 @@ GameObject:
   - component: {fileID: 136982963086718276}
   - component: {fileID: 54254693213157620}
   - component: {fileID: 153019083015080706}
+  - component: {fileID: 114589076615244424}
   m_Layer: 0
   m_Name: Leg1
   m_TagString: Untagged
@@ -2193,6 +2197,22 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 1
+--- !u!114 &114412091036881826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488218216120900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 1
+  penalizeGroundContact: 1
+  groundContactPenalty: -1
+  touchingGround: 0
 --- !u!114 &114435457971807378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2209,6 +2229,54 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 1
+--- !u!114 &114519426989641784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1461674718577362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 1
+  penalizeGroundContact: 1
+  groundContactPenalty: -1
+  touchingGround: 0
+--- !u!114 &114589076615244424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549061739102326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 1
+  penalizeGroundContact: 1
+  groundContactPenalty: -1
+  touchingGround: 0
+--- !u!114 &114807230467749122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045770475564070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc84e8a6a2a6ee47ba1aba09dd1f243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  agentDoneOnGroundContact: 1
+  penalizeGroundContact: 1
+  groundContactPenalty: -1
+  touchingGround: 0
 --- !u!114 &114855246855209884
 MonoBehaviour:
   m_ObjectHideFlags: 1
