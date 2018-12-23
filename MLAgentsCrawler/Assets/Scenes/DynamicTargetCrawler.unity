@@ -317,6 +317,13 @@ MonoBehaviour:
   rewardMovingTowardsTarget: 1
   rewardFacingTarget: 1
   rewardUseTimePenalty: 0
+  useFootGroundedVisualization: 0
+  foot0: {fileID: 1796217684}
+  foot1: {fileID: 1545793770}
+  foot2: {fileID: 974838137}
+  foot3: {fileID: 590028139}
+  groundedMaterial: {fileID: 2100000, guid: ce54543f1115dee4897c9fc57f14ae43, type: 2}
+  unGroundedMaterial: {fileID: 2100000, guid: 489bb5aa203f15540b3cd02834ec8707, type: 2}
 --- !u!114 &207238986
 MonoBehaviour:
   m_ObjectHideFlags: 0

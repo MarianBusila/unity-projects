@@ -37,6 +37,17 @@ public class CrawlerAgent : Agent {
     public bool rewardFacingTarget; // Agent should face the target
     public bool rewardUseTimePenalty; // Hurry up
 
+    [Header("Foot Grounded Visualization")]
+    [Space(10)]
+    public bool useFootGroundedVisualization;
+
+    public MeshRenderer foot0;
+    public MeshRenderer foot1;
+    public MeshRenderer foot2;
+    public MeshRenderer foot3;
+    public Material groundedMaterial;
+    public Material unGroundedMaterial;
+
     bool isNewDecisionStep;
     int currentDecisionStep;
 
@@ -109,6 +120,24 @@ public class CrawlerAgent : Agent {
 
         // Update pos to target
         dirToTarget = target.position - jdController.bodyPartsDict[body].rb.position;
+
+        // If enabled the feet will light up green when the foot is grounded.
+        // This is just a visualization and isn't necessary for function
+        if (useFootGroundedVisualization)
+        {
+            foot0.material = jdController.bodyPartsDict[leg0Lower].groundContact.touchingGround
+                ? groundedMaterial
+                : unGroundedMaterial;
+            foot1.material = jdController.bodyPartsDict[leg1Lower].groundContact.touchingGround
+                ? groundedMaterial
+                : unGroundedMaterial;
+            foot2.material = jdController.bodyPartsDict[leg2Lower].groundContact.touchingGround
+                ? groundedMaterial
+                : unGroundedMaterial;
+            foot3.material = jdController.bodyPartsDict[leg3Lower].groundContact.touchingGround
+                ? groundedMaterial
+                : unGroundedMaterial;
+        }
 
         // Joint update logic only needs to happen when a new decision is made
         if (isNewDecisionStep)
