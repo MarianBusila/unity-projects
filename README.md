@@ -1,5 +1,11 @@
 ## Small games and experiences developed in Unity3D.
 
+* MLAgents Crawler - a creature with 4 legs and 4 forelegs which has to move its body towards the target. The legs, forelegs and body are connected using configurable joints.
+The agent collects observations related to  position, rotation, velocity, and angular velocities of each leg, foreleg and body. The agent is rewarded when it gets closer to the target, when is facing the target and when it touches the target.
+In the first training session the agent it is free to find a way to move towards the target.
+
+![MLAgentsCrawlerBackwards](images/MLAgentsCrawlerBackwards.gif)
+
 * MLAgents Reacher Arm - using Reinforcement Learning with [MLAgents](https://github.com/Unity-Technologies/ml-agents) Toolkit to train a double jointed arm to move it's hand to goal location and keep it there.
 The agent collects observations related to position, rotation, velocity and angular velocity of the upper and lower arm. He is rewarded each time when the hand is in goal location.
 
