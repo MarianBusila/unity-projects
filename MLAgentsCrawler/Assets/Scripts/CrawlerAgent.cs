@@ -37,10 +37,13 @@ public class CrawlerAgent : Agent {
     public bool rewardFacingTarget; // Agent should face the target
     public bool rewardUseTimePenalty; // Hurry up
 
+    bool isNewDecisionStep;
+    int currentDecisionStep;
 
     public override void InitializeAgent()
     {
         jdController = GetComponent<JointDriveController>();
+        currentDecisionStep = 1;
 
         //Setup each body part
         jdController.SetupBodyPart(body);
@@ -107,29 +110,33 @@ public class CrawlerAgent : Agent {
         // Update pos to target
         dirToTarget = target.position - jdController.bodyPartsDict[body].rb.position;
 
-        // The dictionary with all the body parts in it are in the jdController
-        var bpDict = jdController.bodyPartsDict;
+        // Joint update logic only needs to happen when a new decision is made
+        if (isNewDecisionStep)
+        {
+            // The dictionary with all the body parts in it are in the jdController
+            var bpDict = jdController.bodyPartsDict;
 
-        int i = -1;
-        // Pick a new target joint rotation
-        bpDict[leg0Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-        bpDict[leg1Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-        bpDict[leg2Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-        bpDict[leg3Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-        bpDict[leg0Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
-        bpDict[leg1Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
-        bpDict[leg2Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
-        bpDict[leg3Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
+            int i = -1;
+            // Pick a new target joint rotation
+            bpDict[leg0Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+            bpDict[leg1Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+            bpDict[leg2Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+            bpDict[leg3Upper].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+            bpDict[leg0Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
+            bpDict[leg1Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
+            bpDict[leg2Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
+            bpDict[leg3Lower].SetJointTargetRotation(vectorAction[++i], 0, 0);
 
-        // Update joint strength
-        bpDict[leg0Upper].SetJointStrength(vectorAction[++i]);
-        bpDict[leg1Upper].SetJointStrength(vectorAction[++i]);
-        bpDict[leg2Upper].SetJointStrength(vectorAction[++i]);
-        bpDict[leg3Upper].SetJointStrength(vectorAction[++i]);
-        bpDict[leg0Lower].SetJointStrength(vectorAction[++i]);
-        bpDict[leg1Lower].SetJointStrength(vectorAction[++i]);
-        bpDict[leg2Lower].SetJointStrength(vectorAction[++i]);
-        bpDict[leg3Lower].SetJointStrength(vectorAction[++i]);
+            // Update joint strength
+            bpDict[leg0Upper].SetJointStrength(vectorAction[++i]);
+            bpDict[leg1Upper].SetJointStrength(vectorAction[++i]);
+            bpDict[leg2Upper].SetJointStrength(vectorAction[++i]);
+            bpDict[leg3Upper].SetJointStrength(vectorAction[++i]);
+            bpDict[leg0Lower].SetJointStrength(vectorAction[++i]);
+            bpDict[leg1Lower].SetJointStrength(vectorAction[++i]);
+            bpDict[leg2Lower].SetJointStrength(vectorAction[++i]);
+            bpDict[leg3Lower].SetJointStrength(vectorAction[++i]);
+        }
 
         // Set reward for this step according to mixture of the following elements.
         if (rewardMovingTowardsTarget)
@@ -146,6 +153,8 @@ public class CrawlerAgent : Agent {
         {
             RewardFunctionTimePenalty();
         }
+
+        IncrementDecisionTimer();
     }
 
     public override void AgentReset()
@@ -159,6 +168,10 @@ public class CrawlerAgent : Agent {
         {
             bodyPart.Reset(bodyPart);
         }
+
+        isNewDecisionStep = true;
+        currentDecisionStep = 1;
+
     }
 
     /// <summary>
@@ -207,6 +220,24 @@ public class CrawlerAgent : Agent {
     void RewardFunctionTimePenalty()
     {
         AddReward(-0.001f);
+    }
+
+    /// <summary>
+    /// We only need to change the joint settings based on decision freq.
+    /// </summary>
+    public void IncrementDecisionTimer()
+    {
+        if (currentDecisionStep == agentParameters.numberOfActionsBetweenDecisions
+            || agentParameters.numberOfActionsBetweenDecisions == 1)
+        {
+            currentDecisionStep = 1;
+            isNewDecisionStep = true;
+        }
+        else
+        {
+            currentDecisionStep++;
+            isNewDecisionStep = false;
+        }
     }
 
 }
